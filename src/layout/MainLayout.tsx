@@ -59,7 +59,7 @@ const MainLayout = () => {
         )}
         
         <main className={`layout-main ${shouldShowSidebar && isSidebarOpen ? "with-sidebar" : "full-width"}`}>
-          <div className="layout-container">
+          <div className="layout-container-full">
             <Outlet context={{ activeCategory, setActiveCategory }} />
           </div>
         </main>
@@ -69,7 +69,7 @@ const MainLayout = () => {
         <div className="footer-content">
           <div className="footer-brand">
             <span className="footer-logo">✦</span>
-            <span className="footer-name">Smart Hotel Finder</span>
+            <span className="footer-name">HelloET.com</span>
           </div>
           <div className="footer-links">
             <a href="/about">About</a>
@@ -78,32 +78,44 @@ const MainLayout = () => {
             <a href="/terms">Terms</a>
           </div>
           <div className="footer-copyright">
-            © {new Date().getFullYear()} Smart Hotel Finder — All rights reserved
+            © {new Date().getFullYear()} HelloET.com — All rights reserved
           </div>
         </div>
       </footer>
 
       <style>{`
-        /* CSS Variables */
+        /* CSS Variables - New Brand Colors */
         .main-layout {
           --font-serif-primary: "Times New Roman", Times, Georgia, "EB Garamond", Garamond, serif;
           --font-serif-secondary: Georgia, "Times New Roman", Times, serif;
           --font-sans-ui: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
           
-          --color-bg-page: #fefcf8;
+          /* NEW BRAND COLORS */
+          --primary: #006747;
+          --primary-light: #008060;
+          --primary-dim: #E6F4EF;
+          --secondary: #EEF578;
+          --secondary-dark: #E0E865;
+          --accent: #E27AC0;
+          --accent-light: #E895CD;
+          --accent-dim: #FCE9F6;
+          --mint: #D1EFE4;
+          --mint-dark: #B8E0D0;
+          
+          --color-bg-page: var(--mint);
           --color-bg-surface: #ffffff;
           --color-text-primary: #1e2a2e;
           --color-text-secondary: #3a4a4f;
           --color-text-muted: #6b7b7e;
           --color-border-light: #e8e2d4;
-          --color-border-focus: #b8860b;
-          --color-accent-gold: #b8860b;
-          --color-accent-gold-light: #d4af37;
-          --color-accent-gold-dim: #f5e6c8;
+          --color-border-focus: var(--primary);
+          --color-accent: var(--primary);
+          --color-accent-light: var(--primary-light);
+          --color-accent-dim: var(--primary-dim);
           
-          --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
-          --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
-          --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.08);
+          --shadow-sm: 0 1px 2px rgba(0, 103, 71, 0.04);
+          --shadow-md: 0 4px 12px rgba(0, 103, 71, 0.06);
+          --shadow-lg: 0 12px 28px rgba(0, 103, 71, 0.08);
           
           --transition-default: all 0.25s ease;
         }
@@ -165,52 +177,36 @@ const MainLayout = () => {
           to { opacity: 1; }
         }
 
-        /* Main Content Area */
+        /* Main Content Area - FULL WIDTH */
         .layout-main {
           flex: 1;
           background-color: var(--color-bg-page);
-          padding: 2rem 2rem 4rem 2rem;
+          padding: 0;
           transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           min-height: calc(100vh - 70px - 200px);
+          width: 100%;
         }
 
         .layout-main.with-sidebar {
-          margin-left: 300px;
+          margin-left: 280px;
         }
 
         .layout-main.full-width {
           margin-left: 0;
         }
 
-        .layout-container {
-          max-width: 1400px;
+        /* FULL WIDTH CONTAINER - NO MARGINS OR PADDING */
+        .layout-container-full {
           width: 100%;
-          margin: 0 auto;
-          background-color: var(--color-bg-surface);
-          border-radius: 24px;
-          box-shadow: var(--shadow-sm);
-          transition: var(--transition-default);
-          animation: contentFade 0.4s ease-out;
-        }
-
-        .layout-container:hover {
-          box-shadow: var(--shadow-md);
-        }
-
-        @keyframes contentFade {
-          0% {
-            opacity: 0;
-            transform: translateY(8px);
-          }
-          100% {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          margin: 0;
+          padding: 0;
+          background-color: transparent;
+          box-shadow: none;
         }
 
         /* Footer */
         .layout-footer {
-          background: linear-gradient(180deg, #f8f6f0 0%, #f0ede5 100%);
+          background: linear-gradient(135deg, #FAF9F5 0%, #F5F4EF 100%);
           border-top: 1px solid var(--color-border-light);
           padding: 2.5rem 1rem 2rem 1rem;
           font-family: var(--font-serif-primary);
@@ -218,14 +214,14 @@ const MainLayout = () => {
         }
 
         .footer-content {
-          max-width: 1280px;
+          max-width: 1400px;
           margin: 0 auto;
           display: flex;
           flex-wrap: wrap;
           justify-content: space-between;
           align-items: center;
           gap: 1.5rem;
-          padding: 0 1rem;
+          padding: 0 2rem;
         }
 
         .footer-brand {
@@ -238,7 +234,7 @@ const MainLayout = () => {
 
         .footer-logo {
           font-size: 1.4rem;
-          color: var(--color-accent-gold);
+          color: var(--primary);
           font-family: var(--font-serif-primary);
         }
 
@@ -269,8 +265,8 @@ const MainLayout = () => {
         }
 
         .footer-links a:hover {
-          color: var(--color-accent-gold);
-          border-bottom-color: var(--color-accent-gold-light);
+          color: var(--primary);
+          border-bottom-color: var(--primary-light);
         }
 
         .footer-copyright {
@@ -292,18 +288,18 @@ const MainLayout = () => {
         }
 
         .main-layout ::-webkit-scrollbar-thumb {
-          background: var(--color-accent-gold-light);
+          background: var(--primary-light);
           border-radius: 10px;
         }
 
         .main-layout ::-webkit-scrollbar-thumb:hover {
-          background: var(--color-accent-gold);
+          background: var(--primary);
         }
 
         /* Focus States */
         .layout-main a:focus-visible,
         .layout-footer a:focus-visible {
-          outline: 2px solid var(--color-accent-gold);
+          outline: 2px solid var(--primary);
           outline-offset: 3px;
           border-radius: 4px;
         }
@@ -314,20 +310,17 @@ const MainLayout = () => {
             margin-left: 0;
           }
           
-          .layout-main {
-            padding: 1.5rem 1rem 3rem 1rem;
+          .footer-content {
+            padding: 0 1rem;
           }
         }
 
         @media (max-width: 768px) {
-          .layout-main {
-            padding: 1rem 0.75rem 2rem 0.75rem;
-          }
-
           .footer-content {
             flex-direction: column;
             text-align: center;
             gap: 1rem;
+            padding: 0 1rem;
           }
 
           .footer-links {
@@ -346,13 +339,9 @@ const MainLayout = () => {
           .footer-links a {
             font-size: 0.75rem;
           }
-
-          .layout-main {
-            padding: 0.75rem 0.5rem 1.5rem 0.5rem;
-          }
-
-          .layout-container {
-            border-radius: 16px;
+          
+          .footer-content {
+            padding: 0 0.75rem;
           }
         }
       `}</style>

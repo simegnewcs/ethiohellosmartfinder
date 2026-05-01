@@ -21,8 +21,6 @@ import {
   Wine,
   Hospital,
   ChevronRight,
-  Sparkles,
-  Heart,
 } from "lucide-react";
 
 interface HomeContext {
@@ -45,7 +43,7 @@ const Home = () => {
         location: "Addis Ababa",
         price: 250,
         rating: 4.8,
-        image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400&h=300&fit=crop",
+         image: "https://cache.marriott.com/content/dam/marriott-renditions/ADDLC/addlc-exterior-7436-hor-wide.jpg?output-quality=70&interpolation=progressive-bilinear&downsize=680px:*",
         type: "hotel",
         path: "/hotel/1"
       },
@@ -55,7 +53,7 @@ const Home = () => {
         location: "Addis Ababa",
         price: 220,
         rating: 4.7,
-        image: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=400&h=300&fit=crop",
+         image: "https://assets.hyatt.com/content/dam/hyatt/hyattdam/images/2019/02/20/0822/Hyatt-Regency-Addis-Ababa-P007-Recreational-Swimming-Pool.jpg/Hyatt-Regency-Addis-Ababa-P007-Recreational-Swimming-Pool.16x9.jpg",
         type: "hotel",
         path: "/hotel/2"
       },
@@ -65,7 +63,7 @@ const Home = () => {
         location: "Addis Ababa",
         price: 200,
         rating: 4.6,
-        image: "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=400&h=300&fit=crop",
+        image: "https://www.hilton.com/im/en/ADDHITW/4624428/addhitw-exterior.tif?impolicy=crop&cw=4288&ch=2400&gravity=NorthWest&xposition=0&yposition=223&rw=768&rh=430",
         type: "hotel",
         path: "/hotel/3"
       },
@@ -75,7 +73,7 @@ const Home = () => {
         location: "Addis Ababa",
         price: 180,
         rating: 4.5,
-        image: "https://images.unsplash.com/photo-1551882547-ff40c63fe5fa?w=400&h=300&fit=crop",
+       image: "https://ik.imgkit.net/3vlqs5axxjf/external/ik-seo/https://media.iceportal.com/113891/photos/81924810_XL/Radisson-Blu-Water-Garden-Hotel-Dhaka-Exterior.jpg?tr=w-656%2Ch-390%2Cfo-auto",
         type: "hotel",
         path: "/hotel/4"
       }
@@ -88,7 +86,7 @@ const Home = () => {
         cuisine: "Ethiopian",
         rating: 4.6,
         price: 25,
-        image: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=300&fit=crop",
+       image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/17/02/df/80/restaurant.jpg?w=900&h=500&s=1",
         type: "restaurant",
         path: "/restaurant/1"
       },
@@ -99,7 +97,7 @@ const Home = () => {
         cuisine: "Traditional",
         rating: 4.5,
         price: 30,
-        image: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=400&h=300&fit=crop",
+         image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/de/30/d7/kategna-branch-laphto.jpg?w=900&h=500&s=1",
         type: "restaurant",
         path: "/restaurant/2"
       }
@@ -174,7 +172,7 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      {/* HERO SECTION with Search */}
+      {/* HERO SECTION - Full Width */}
       <section className="hero-section">
         <div className="hero-overlay"></div>
         <div className="hero-container">
@@ -254,9 +252,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CATEGORIES SECTION */}
+      {/* CATEGORIES SECTION - Full Width */}
       <section className="categories-section">
-        <div className="container">
+        <div className="container-full">
           <div className="section-header">
             <span className="section-label">Browse By Category</span>
             <h2 className="section-title">Explore Places by Category</h2>
@@ -281,9 +279,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* FEATURED HOTELS SECTION */}
+      {/* FEATURED HOTELS SECTION - Full Width */}
       <section className="featured-section">
-        <div className="container">
+        <div className="container-full">
           <div className="section-header">
             <span className="section-label">Top Rated</span>
             <h2 className="section-title">Featured Hotels</h2>
@@ -321,9 +319,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* FEATURED RESTAURANTS SECTION */}
+      {/* FEATURED RESTAURANTS SECTION - Full Width */}
       <section className="restaurants-section">
-        <div className="container">
+        <div className="container-full">
           <div className="section-header">
             <span className="section-label">Popular Eateries</span>
             <h2 className="section-title">Top Restaurants</h2>
@@ -364,9 +362,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* WHY CHOOSE US SECTION */}
+      {/* WHY CHOOSE US SECTION - Full Width */}
       <section className="why-choose-section">
-        <div className="container">
+        <div className="container-full">
           <div className="why-choose-grid">
             <div className="why-choose-content">
               <span className="section-label">Why Choose Us</span>
@@ -415,7 +413,7 @@ const Home = () => {
             </div>
             <div className="why-choose-image">
               <img 
-                src="https://images.unsplash.com/photo-1571003123894-1f0594d2b5d9?w=600&h=500&fit=crop" 
+                   src="https://media.istockphoto.com/id/2155763302/photo/growing-development-of-central-business-district-with-modern-skyscrapers-of-downtown-of-adis.jpg?s=612x612&w=0&k=20&c=nwl7KgTITNnrfAlYCl3FCRU8USHBcJs9UztDWehzJGQ=" 
                 alt="Travel Experience"
               />
             </div>
@@ -423,9 +421,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CALL TO ACTION SECTION */}
+      {/* CALL TO ACTION SECTION - Full Width */}
       <section className="cta-section">
-        <div className="container">
+        <div className="container-full">
           <div className="cta-content">
             <h2>List Your Business With Us</h2>
             <p>Join hundreds of businesses already growing with HelloET.com</p>
@@ -442,21 +440,16 @@ const Home = () => {
           --font-serif: "Times New Roman", Times, Georgia, Garamond, serif;
           --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
           
-          /* NEW BRAND COLORS */
+          /* BRAND COLORS */
           --color-primary: #006747;
           --color-primary-light: #008060;
           --color-primary-dim: #E6F4EF;
           --color-secondary: #EEF578;
           --color-secondary-dark: #E0E865;
           --color-accent: #E27AC0;
-          --color-accent-light: #E895CD;
-          --color-accent-dim: #FCE9F6;
           --color-mint: #D1EFE4;
-          --color-mint-dark: #B8E0D0;
           
           --color-dark: #1a1a1a;
-          --color-charcoal: #2c2c2c;
-          --color-cream: #FAF9F5;
           --color-white: #ffffff;
           --color-gray: #6b7b7e;
           --color-gray-light: #e8e2d4;
@@ -467,9 +460,9 @@ const Home = () => {
           --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Container */
-        .container {
-          max-width: 1280px;
+        /* Full Width Container - NO MARGINS */
+        .container-full {
+          max-width: 1400px;
           margin: 0 auto;
           padding: 0 2rem;
         }
@@ -507,9 +500,10 @@ const Home = () => {
           color: var(--color-gray);
         }
 
-        /* HERO SECTION */
+        /* HERO SECTION - Full Width Edge to Edge */
         .hero-section {
           position: relative;
+          width: 100%;
           min-height: 85vh;
           display: flex;
           align-items: center;
@@ -538,8 +532,8 @@ const Home = () => {
         .hero-container {
           position: relative;
           z-index: 2;
-          max-width: 1280px;
-          width: 90%;
+          max-width: 1400px;
+          width: 100%;
           margin: 0 auto;
           padding: 4rem 2rem;
         }
@@ -734,8 +728,9 @@ const Home = () => {
           opacity: 0.8;
         }
 
-        /* Categories Section */
+        /* Categories Section - Full Width */
         .categories-section {
+          width: 100%;
           padding: 5rem 0;
           background: var(--color-white);
         }
@@ -797,9 +792,10 @@ const Home = () => {
           transform: translateX(4px);
         }
 
-        /* Featured Sections */
+        /* Featured Sections - Full Width */
         .featured-section,
         .restaurants-section {
+          width: 100%;
           padding: 4rem 0;
           background: var(--color-mint);
         }
@@ -929,8 +925,9 @@ const Home = () => {
           color: var(--color-primary-light);
         }
 
-        /* Why Choose Us */
+        /* Why Choose Us - Full Width */
         .why-choose-section {
+          width: 100%;
           padding: 5rem 0;
           background: linear-gradient(135deg, #FAF9F5 0%, #F5F4EF 100%);
         }
@@ -985,8 +982,9 @@ const Home = () => {
           box-shadow: var(--shadow-lg);
         }
 
-        /* CTA Section */
+        /* CTA Section - Full Width */
         .cta-section {
+          width: 100%;
           padding: 5rem 0;
           background: linear-gradient(135deg, var(--color-primary) 0%, #004d33 100%);
           text-align: center;
@@ -1074,15 +1072,27 @@ const Home = () => {
           .search-btn-hero {
             width: 100%;
           }
+          
+          .container-full {
+            padding: 0 1rem;
+          }
+
+          /* FIX: Ensure city selector dropdown text is fully visible on mobile */
+          .city-select {
+            font-size: 1rem;
+            padding: 0.8rem 1rem;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+            appearance: menulist; /* Keep native dropdown arrow */
+            background-color: white;
+            border-radius: 60px;
+          }
         }
 
         @media (max-width: 480px) {
           .hero-title {
             font-size: 1.8rem;
-          }
-
-          .container {
-            padding: 0 1rem;
           }
 
           .featured-grid {
@@ -1100,6 +1110,10 @@ const Home = () => {
           
           .stat-number {
             font-size: 1.5rem;
+          }
+          
+          .container-full {
+            padding: 0 0.75rem;
           }
         }
       `}</style>

@@ -1,4 +1,4 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, useLocation, Navigate } from "react-router-dom";
 import MainLayout from "../layout/MainLayout";
 
 // Main Pages
@@ -27,36 +27,110 @@ import Register from "../pages/Register";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
 
+// Search Page component that redirects to the correct category page
+function SearchPage() {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const query = params.get("q")?.trim().toLowerCase() || "";
+  const city = params.get("city") || "";
+
+  // If no search query, go home
+  if (!query) {
+    return <Navigate to="/" replace />;
+  }
+
+  // Define category mapping: keyword -> route path
+  const categoryMap: Record<string, string> = {
+    hotel: "/hotels",
+    hotels: "/hotels",
+    restaurant: "/restaurants",
+    restaurants: "/restaurants",
+    cafe: "/coffee-houses",
+    "coffee house": "/coffee-houses",
+    "coffee houses": "/coffee-houses",
+    "coffee shop": "/coffee-houses",
+    "coffee shops": "/coffee-houses",
+    "cake shop": "/cake-shops",
+    "cake shops": "/cake-shops",
+    pharmacy: "/pharmacies",
+    pharmacies: "/pharmacies",
+    gym: "/gyms",
+    gyms: "/gyms",
+    "shopping center": "/shopping-centers",
+    "shopping centers": "/shopping-centers",
+    mall: "/shopping-centers",
+    bar: "/bars",
+    bars: "/bars",
+    nightclub: "/bars",
+    nightclubs: "/bars",
+    hospital: "/hospitals",
+    hospitals: "/hospitals",
+    supermarket: "/supermarkets",
+    supermarkets: "/supermarkets",
+  };
+
+  // Find the first matching category
+  let redirectPath = "";
+  for (const [keyword, path] of Object.entries(categoryMap)) {
+    if (query.includes(keyword)) {
+      redirectPath = path;
+      break;
+    }
+  }
+
+  // Default to hotels page with search query as filter
+  if (!redirectPath) {
+    redirectPath = "/hotels";
+  }
+
+  // Build the target URL with query and city parameters
+  const searchParams = new URLSearchParams();
+  if (query) searchParams.set("q", query);
+  if (city) searchParams.set("city", city);
+  const targetUrl = `${redirectPath}${searchParams.toString() ? `?${searchParams.toString()}` : ""}`;
+
+  return <Navigate to={targetUrl} replace />;
+}
+
 // ComingSoon fallback component
 function ComingSoon() {
   return (
-    <div style={{ 
-      padding: "60px 40px", 
-      textAlign: "center",
-      minHeight: "60vh",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center"
-    }}>
-      <div style={{ 
-        fontSize: "64px", 
-        marginBottom: "20px",
-        fontFamily: "Times New Roman, serif"
-      }}>
+    <div
+      style={{
+        padding: "60px 40px",
+        textAlign: "center",
+        minHeight: "60vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <div
+        style={{
+          fontSize: "64px",
+          marginBottom: "20px",
+          fontFamily: "Times New Roman, serif",
+        }}
+      >
         ✦
       </div>
-      <h2 style={{ 
-        fontFamily: "Times New Roman, serif",
-        color: "#b8860b",
-        marginBottom: "12px"
-      }}>
+      <h2
+        style={{
+          fontFamily: "Times New Roman, serif",
+          color: "#b8860b",
+          marginBottom: "12px",
+        }}
+      >
         Coming Soon
       </h2>
-      <p style={{ 
-        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-        color: "#6b7b7e"
-      }}>
+      <p
+        style={{
+          fontFamily:
+            "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+          color: "#6b7b7e",
+        }}
+      >
         This feature is under development. Stay tuned!
       </p>
     </div>
@@ -66,39 +140,48 @@ function ComingSoon() {
 // Error page component
 function ErrorPage() {
   return (
-    <div style={{ 
-      padding: "60px 40px", 
-      textAlign: "center",
-      minHeight: "60vh",
-      display: "flex",
-      flexDirection: "column",
-      alignItems: "center",
-      justifyContent: "center"
-    }}>
-      <div style={{ 
-        fontSize: "80px", 
-        marginBottom: "20px",
-        fontFamily: "Times New Roman, serif",
-        color: "#b8860b"
-      }}>
+    <div
+      style={{
+        padding: "60px 40px",
+        textAlign: "center",
+        minHeight: "60vh",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      <div
+        style={{
+          fontSize: "80px",
+          marginBottom: "20px",
+          fontFamily: "Times New Roman, serif",
+          color: "#b8860b",
+        }}
+      >
         404
       </div>
-      <h2 style={{ 
-        fontFamily: "Times New Roman, serif",
-        color: "#1e2a2e",
-        marginBottom: "12px"
-      }}>
+      <h2
+        style={{
+          fontFamily: "Times New Roman, serif",
+          color: "#1e2a2e",
+          marginBottom: "12px",
+        }}
+      >
         Page Not Found
       </h2>
-      <p style={{ 
-        fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-        color: "#6b7b7e",
-        marginBottom: "24px"
-      }}>
+      <p
+        style={{
+          fontFamily:
+            "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+          color: "#6b7b7e",
+          marginBottom: "24px",
+        }}
+      >
         The page you're looking for doesn't exist or has been moved.
       </p>
-      <a 
-        href="/" 
+      <a
+        href="/"
         style={{
           display: "inline-block",
           padding: "10px 24px",
@@ -106,8 +189,9 @@ function ErrorPage() {
           color: "white",
           textDecoration: "none",
           borderRadius: "40px",
-          fontFamily: "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
-          transition: "all 0.3s ease"
+          fontFamily:
+            "-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+          transition: "all 0.3s ease",
         }}
         onMouseEnter={(e) => {
           e.currentTarget.style.background = "#9a7209";
@@ -135,7 +219,7 @@ const AppRouter = createBrowserRouter([
         index: true,
         element: <Home />,
       },
-      
+
       // ============ HOTELS ROUTES ============
       {
         path: "hotels",
@@ -241,9 +325,10 @@ const AppRouter = createBrowserRouter([
         path: "category/:category",
         element: <Home />,
       },
+      // SEARCH ROUTE - now uses intelligent redirect
       {
         path: "search",
-        element: <Hotels />,
+        element: <SearchPage />,
       },
 
       // ============ STATIC PAGES ============
