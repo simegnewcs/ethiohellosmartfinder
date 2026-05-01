@@ -82,10 +82,10 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
             </div>
           </Link>
 
-          {/* Desktop Categories Button - ONLY visible on desktop */}
-          <button className="nav-categories-btn" onClick={onMenuClick}>
+          {/* Mobile: Single button to open sidebar */}
+          <button className="mobile-sidebar-trigger mobile-only" onClick={onMenuClick}>
             <LayoutGrid size={20} />
-            <span>Browse Categories</span>
+            <span>Categories</span>
           </button>
 
           {/* Location Selector */}
@@ -95,7 +95,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
               onClick={() => setIsLocationOpen(!isLocationOpen)}
             >
               <MapPin size={16} />
-              <span className="location-text">{selectedLocation}</span>
+              <span>{selectedLocation}</span>
               <ChevronDown size={14} className={`location-chevron ${isLocationOpen ? "rotated" : ""}`} />
             </button>
 
@@ -159,7 +159,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
               <span className="notification-badge">3</span>
             </button>
 
-            {/* User Menu - Desktop */}
+            {/* User Menu */}
             <div className="user-menu-wrapper">
               <button className="user-menu-btn" onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}>
                 <div className="user-avatar">
@@ -193,7 +193,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
               )}
             </div>
 
-            {/* Mobile user menu trigger - ONLY visible on mobile/tablet */}
+            {/* Mobile user menu trigger */}
             <button className="action-btn mobile-user-menu-btn" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
               <User size={20} />
             </button>
@@ -219,7 +219,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         </div>
       </nav>
 
-      {/* Mobile User Menu (Right side drawer for user actions) - ONLY on mobile/tablet */}
+      {/* Mobile User Menu (Right side drawer for user actions) */}
       <div className={`mobile-user-drawer ${isMobileMenuOpen ? "open" : ""}`}>
         <div className="mobile-drawer-header">
           <div className="user-info">
@@ -272,14 +272,17 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           --font-serif: "Times New Roman", Times, Georgia, "EB Garamond", serif;
           --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
           
-          /* BRAND COLORS */
+          /* NEW BRAND COLORS */
           --primary: #006747;
           --primary-light: #008060;
           --primary-dim: #E6F4EF;
           --secondary: #EEF578;
           --secondary-dark: #E0E865;
           --accent: #E27AC0;
+          --accent-light: #E895CD;
+          --accent-dim: #FCE9F6;
           --mint: #D1EFE4;
+          --mint-dark: #B8E0D0;
           
           --dark: #1e2a2e;
           --gray: #5a6b6f;
@@ -317,6 +320,10 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           gap: 1rem;
         }
 
+        .mobile-only {
+          display: none;
+        }
+
         /* Logo */
         .logo-wrapper {
           display: flex;
@@ -324,7 +331,6 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           gap: 0.75rem;
           text-decoration: none;
           transition: var(--transition);
-          flex-shrink: 0;
         }
 
         .logo-icon {
@@ -358,8 +364,8 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           letter-spacing: 1px;
         }
 
-        /* Desktop Categories Button */
-        .nav-categories-btn {
+        /* Mobile Sidebar Trigger */
+        .mobile-sidebar-trigger {
           display: flex;
           align-items: center;
           gap: 0.5rem;
@@ -374,7 +380,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           transition: var(--transition);
         }
 
-        .nav-categories-btn:hover {
+        .mobile-sidebar-trigger:hover {
           background: var(--primary);
           color: white;
           border-color: var(--primary);
@@ -398,7 +404,6 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           font-size: 0.85rem;
           color: var(--dark);
           transition: var(--transition);
-          white-space: nowrap;
         }
 
         .location-selector-btn:hover {
@@ -411,16 +416,8 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           color: white;
         }
 
-        .location-text {
-          max-width: 120px;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-
         .location-chevron {
           transition: transform 0.3s ease;
-          flex-shrink: 0;
         }
 
         .location-chevron.rotated {
@@ -435,7 +432,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           background: var(--white);
           border-radius: 16px;
           box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-          min-width: 200px;
+          min-width: 220px;
           overflow: hidden;
           z-index: 1001;
           animation: dropdownFade 0.2s ease;
@@ -515,7 +512,6 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           font-family: var(--font-sans);
           font-size: 0.85rem;
           outline: none;
-          min-width: 100px;
         }
 
         .desktop-search-btn {
@@ -528,7 +524,6 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           font-family: var(--font-sans);
           font-size: 0.8rem;
           transition: var(--transition);
-          white-space: nowrap;
         }
 
         .desktop-search-btn:hover {
@@ -540,7 +535,6 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           display: flex;
           align-items: center;
           gap: 0.5rem;
-          flex-shrink: 0;
         }
 
         .action-btn {
@@ -576,16 +570,11 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           min-width: 16px;
         }
 
-        /* Mobile specific elements - hidden by default */
         .search-mobile-btn {
           display: none;
         }
 
         .mobile-user-menu-btn {
-          display: none;
-        }
-
-        .mobile-search-expandable {
           display: none;
         }
 
@@ -721,6 +710,48 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           color: white;
         }
 
+        /* Mobile Search Expandable */
+        .mobile-search-expandable {
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.4s ease, padding 0.3s ease;
+          background: var(--white);
+          border-top: 1px solid var(--gray-light);
+        }
+
+        .mobile-search-expandable.open {
+          max-height: 80px;
+          padding: 0.8rem 1rem;
+        }
+
+        .mobile-search-form {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          background: var(--mint);
+          border-radius: 40px;
+          padding: 0.2rem 0.2rem 0.2rem 1rem;
+        }
+
+        .mobile-search-input {
+          flex: 1;
+          background: none;
+          border: none;
+          padding: 0.6rem 0;
+          font-family: var(--font-sans);
+          font-size: 0.9rem;
+          outline: none;
+        }
+
+        .mobile-search-submit {
+          padding: 0.4rem 1rem;
+          background: var(--primary);
+          color: white;
+          border: none;
+          border-radius: 40px;
+          cursor: pointer;
+        }
+
         /* Mobile User Drawer */
         .mobile-user-drawer {
           position: fixed;
@@ -829,206 +860,43 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           animation: fadeIn 0.3s ease;
         }
 
-        /* Mobile Search Expandable */
-        .mobile-search-expandable {
-          max-height: 0;
-          overflow: hidden;
-          transition: max-height 0.4s ease, padding 0.3s ease;
-          background: var(--white);
-          border-top: 1px solid var(--gray-light);
-        }
-
-        .mobile-search-expandable.open {
-          max-height: 80px;
-          padding: 0.8rem 1rem;
-          display: block;
-        }
-
-        .mobile-search-form {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          background: var(--mint);
-          border-radius: 40px;
-          padding: 0.2rem 0.2rem 0.2rem 1rem;
-        }
-
-        .mobile-search-input {
-          flex: 1;
-          background: none;
-          border: none;
-          padding: 0.6rem 0;
-          font-family: var(--font-sans);
-          font-size: 0.9rem;
-          outline: none;
-        }
-
-        .mobile-search-submit {
-          padding: 0.4rem 1rem;
-          background: var(--primary);
-          color: white;
-          border: none;
-          border-radius: 40px;
-          cursor: pointer;
-        }
-
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }
         }
 
-        /* ============================================ */
-        /* RESPONSIVE BREAKPOINTS */
-        /* ============================================ */
-
-        /* Tablet and Mobile (below 1024px) */
+        /* RESPONSIVE */
         @media (max-width: 1024px) {
-          /* Show mobile elements */
+          .search-wrapper-desktop {
+            display: none;
+          }
+
           .search-mobile-btn {
             display: flex;
           }
           
-          .mobile-user-menu-btn {
+          .mobile-only {
             display: flex;
           }
-          
-          .mobile-search-expandable {
-            display: block;
-          }
-          
-          /* Hide desktop elements */
-          .nav-categories-btn {
-            display: none !important;
-          }
-          
-          .search-wrapper-desktop {
-            display: none !important;
-          }
-          
-          .user-menu-wrapper {
-            display: none !important;
-          }
-          
+
           .navbar-container {
             padding: 0.8rem 1rem;
-            gap: 0.5rem;
           }
-          
-          .location-selector-btn {
-            padding: 0.5rem 0.8rem;
-          }
-          
-          .location-selector-btn .location-text {
+
+          .location-selector-btn span {
             display: none;
           }
           
-          .logo-main {
-            font-size: 0.9rem;
+          .location-selector-btn {
+            padding: 0.5rem;
           }
-          
-          .logo-sub {
-            font-size: 0.6rem;
-          }
-          
-          .logo-icon {
-            font-size: 1.5rem;
-          }
-        }
 
-        /* Mobile (below 768px) */
-        @media (max-width: 768px) {
-          body {
-            padding-top: 60px;
-          }
-          
-          .navbar-container {
-            padding: 0.6rem 0.8rem;
-          }
-          
-          .logo-text {
+          .user-menu-wrapper {
             display: none;
           }
-          
-          .logo-icon {
-            font-size: 1.5rem;
-          }
-          
-          .location-selector-btn {
-            padding: 0.4rem 0.6rem;
-          }
-          
-          .action-btn {
-            padding: 0.4rem;
-          }
-          
-          .nav-actions {
-            gap: 0.3rem;
-          }
-          
-          .notification-badge {
-            font-size: 0.5rem;
-            min-width: 14px;
-            top: 1px;
-            right: 1px;
-          }
-          
-          .mobile-search-expandable.open {
-            max-height: 70px;
-            padding: 0.6rem 0.8rem;
-          }
-        }
 
-        /* Small Mobile (below 480px) */
-        @media (max-width: 480px) {
-          .navbar-container {
-            padding: 0.5rem 0.6rem;
-          }
-          
-          .logo-icon {
-            font-size: 1.3rem;
-          }
-          
-          .location-selector-btn {
-            padding: 0.3rem 0.5rem;
-          }
-          
-          .location-selector-btn svg {
-            width: 14px;
-            height: 14px;
-          }
-          
-          .action-btn {
-            padding: 0.3rem;
-          }
-          
-          .action-btn svg {
-            width: 18px;
-            height: 18px;
-          }
-          
-          .nav-actions {
-            gap: 0.2rem;
-          }
-          
-          .mobile-search-input {
-            font-size: 0.8rem;
-          }
-          
-          .mobile-search-submit {
-            padding: 0.3rem 0.8rem;
-            font-size: 0.8rem;
-          }
-          
-          .mobile-user-drawer {
-            width: 100%;
-            max-width: none;
-          }
-        }
-
-        /* Extra Small (below 360px) */
-        @media (max-width: 360px) {
-          .location-selector-btn {
-            display: none;
+          .mobile-user-menu-btn {
+            display: flex;
           }
         }
       `}</style>

@@ -21,8 +21,6 @@ import {
   Wine,
   Hospital,
   ChevronRight,
-  Sparkles,
-  Heart,
 } from "lucide-react";
 
 interface HomeContext {
