@@ -12,6 +12,7 @@ import {
   LayoutGrid,
   Building2,
   X,
+  Menu,
 } from "lucide-react";
 
 interface NavbarProps {
@@ -24,7 +25,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isLocationOpen, setIsLocationOpen] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedLocation, setSelectedLocation] = useState("All Places");
   const location = useLocation();
@@ -49,7 +50,6 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 20);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
@@ -58,13 +58,16 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
     setIsUserMenuOpen(false);
     setIsLocationOpen(false);
     setIsSearchOpen(false);
-    setIsMobileMenuOpen(false);
+    setIsHamburgerOpen(false);
   }, [location]);
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      const cityParam = selectedLocation === "All Places" ? "" : `&city=${encodeURIComponent(selectedLocation)}`;
+      const cityParam =
+        selectedLocation === "All Places"
+          ? ""
+          : `&city=${encodeURIComponent(selectedLocation)}`;
       window.location.href = `/search?q=${encodeURIComponent(searchQuery)}${cityParam}`;
     }
   };
@@ -82,23 +85,22 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
             </div>
           </Link>
 
-          {/* Mobile: Single button to open sidebar */}
-          <button className="mobile-sidebar-trigger mobile-only" onClick={onMenuClick}>
+          {/* Desktop Categories Button - visible on desktop only */}
+          <button className="nav-categories-btn desktop-only" onClick={onMenuClick}>
             <LayoutGrid size={20} />
-            <span>Categories</span>
+            <span>Browse Categories</span>
           </button>
 
-          {/* Location Selector */}
-          <div className="location-selector-wrapper">
+          {/* Location Selector - desktop only */}
+          <div className="location-selector-wrapper desktop-only">
             <button
               className="location-selector-btn"
               onClick={() => setIsLocationOpen(!isLocationOpen)}
             >
               <MapPin size={16} />
-              <span>{selectedLocation}</span>
+              <span className="location-text">{selectedLocation}</span>
               <ChevronDown size={14} className={`location-chevron ${isLocationOpen ? "rotated" : ""}`} />
             </button>
-
             {isLocationOpen && (
               <div className="location-dropdown">
                 <div className="location-header">
@@ -124,15 +126,17 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
             )}
           </div>
 
-          {/* Search Bar - Desktop */}
-          <div className="search-wrapper-desktop">
+          {/* Search Bar - Desktop only */}
+          <div className="search-wrapper-desktop desktop-only">
             <form onSubmit={handleSearch} className="desktop-search-form">
               <Search size={18} className="search-icon" />
               <input
                 type="text"
-                placeholder={selectedLocation === "All Places" 
-                  ? "Search anywhere in Ethiopia..." 
-                  : `Search in ${selectedLocation}...`}
+                placeholder={
+                  selectedLocation === "All Places"
+                    ? "Search anywhere in Ethiopia..."
+                    : `Search in ${selectedLocation}...`
+                }
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="desktop-search-input"
@@ -141,25 +145,15 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
             </form>
           </div>
 
-          {/* Right Side Actions */}
-          <div className="nav-actions">
-            {/* Search Button - Mobile */}
-            <button className="action-btn search-mobile-btn" onClick={() => setIsSearchOpen(!isSearchOpen)}>
-              <Search size={20} />
-            </button>
-
-            {/* Dark Mode Toggle */}
+          {/* Right Side Actions - desktop only */}
+          <div className="nav-actions desktop-only">
             <button className="action-btn theme-btn" onClick={() => setIsDarkMode(!isDarkMode)}>
               {isDarkMode ? <Sun size={20} /> : <Moon size={20} />}
             </button>
-
-            {/* Notifications */}
             <button className="action-btn notification-btn">
               <Bell size={20} />
               <span className="notification-badge">3</span>
             </button>
-
-            {/* User Menu */}
             <div className="user-menu-wrapper">
               <button className="user-menu-btn" onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}>
                 <div className="user-avatar">
@@ -167,7 +161,6 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
                 </div>
                 <ChevronDown size={16} className={`chevron ${isUserMenuOpen ? "rotated" : ""}`} />
               </button>
-
               {isUserMenuOpen && (
                 <div className="user-dropdown">
                   <div className="dropdown-header">
@@ -192,76 +185,121 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
                 </div>
               )}
             </div>
-
-            {/* Mobile user menu trigger */}
-            <button className="action-btn mobile-user-menu-btn" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-              <User size={20} />
-            </button>
           </div>
-        </div>
 
-        {/* Mobile Search Bar Expandable */}
-        <div className={`mobile-search-expandable ${isSearchOpen ? "open" : ""}`}>
-          <form onSubmit={handleSearch} className="mobile-search-form">
-            <Search size={20} className="search-icon" />
-            <input
-              type="text"
-              placeholder={selectedLocation === "All Places" 
-                ? "Search anywhere in Ethiopia..." 
-                : `Search in ${selectedLocation}...`}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="mobile-search-input"
-              autoFocus={isSearchOpen}
-            />
-            <button type="submit" className="mobile-search-submit">Go</button>
-          </form>
+          {/* Mobile: Browse Categories button */}
+          <button className="nav-categories-btn mobile-only" onClick={onMenuClick}>
+            <LayoutGrid size={20} />
+            <span>Browse</span>
+          </button>
+
+          {/* Mobile: Hamburger button */}
+          <button className="hamburger-btn mobile-only" onClick={() => setIsHamburgerOpen(true)}>
+            <Menu size={24} />
+          </button>
         </div>
       </nav>
 
-      {/* Mobile User Menu (Right side drawer for user actions) */}
-      <div className={`mobile-user-drawer ${isMobileMenuOpen ? "open" : ""}`}>
-        <div className="mobile-drawer-header">
-          <div className="user-info">
-            <div className="user-avatar-large">
-              <User size={24} />
-            </div>
-            <div>
-              <h4>Guest User</h4>
-              <p>guest@example.com</p>
-            </div>
-          </div>
-          <button className="close-drawer" onClick={() => setIsMobileMenuOpen(false)}>
+      {/* Mobile Hamburger Drawer (slide from right) */}
+      <div className={`mobile-hamburger-drawer ${isHamburgerOpen ? "open" : ""}`}>
+        <div className="drawer-header">
+          <span className="drawer-title">Menu</span>
+          <button className="close-drawer" onClick={() => setIsHamburgerOpen(false)}>
             <X size={24} />
           </button>
         </div>
-        <div className="mobile-drawer-body">
-          <Link to="/profile" className="mobile-drawer-item" onClick={() => setIsMobileMenuOpen(false)}>
-            <User size={18} />
-            My Profile
-          </Link>
-          <Link to="/bookings" className="mobile-drawer-item" onClick={() => setIsMobileMenuOpen(false)}>
-            <Bell size={18} />
-            My Bookings
-          </Link>
-          <Link to="/wishlist" className="mobile-drawer-item" onClick={() => setIsMobileMenuOpen(false)}>
-            <Building2 size={18} />
-            Wishlist
-          </Link>
-          <div className="mobile-divider"></div>
-          <Link to="/register" className="mobile-register-btn" onClick={() => setIsMobileMenuOpen(false)}>
-            Register Business
-          </Link>
-          <Link to="/login" className="mobile-login-btn" onClick={() => setIsMobileMenuOpen(false)}>
-            Sign In
-          </Link>
+
+        <div className="drawer-body">
+          {/* Location Filter */}
+          <div className="drawer-section">
+            <div className="drawer-section-title">
+              <MapPin size={18} />
+              <span>All Places Filter</span>
+            </div>
+            <div className="mobile-location-list">
+              {locations.map((city) => (
+                <button
+                  key={city}
+                  className={`mobile-location-item ${selectedLocation === city ? "active" : ""}`}
+                  onClick={() => {
+                    setSelectedLocation(city);
+                    setIsHamburgerOpen(false);
+                  }}
+                >
+                  {city}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* Manual Search */}
+          <div className="drawer-section">
+            <div className="drawer-section-title">
+              <Search size={18} />
+              <span>Manual Search</span>
+            </div>
+            <form onSubmit={handleSearch} className="mobile-search-form-drawer">
+              <input
+                type="text"
+                placeholder={
+                  selectedLocation === "All Places"
+                    ? "Search anywhere..."
+                    : `Search in ${selectedLocation}...`
+                }
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="mobile-search-input-drawer"
+              />
+              <button type="submit" className="mobile-search-submit-drawer">Go</button>
+            </form>
+          </div>
+
+          {/* Dark/Light Toggle */}
+          <div className="drawer-section">
+            <div className="drawer-section-title">
+              {isDarkMode ? <Sun size={18} /> : <Moon size={18} />}
+              <span>Dark / Light Mode</span>
+            </div>
+            <button
+              className="mobile-theme-toggle"
+              onClick={() => setIsDarkMode(!isDarkMode)}
+            >
+              Switch to {isDarkMode ? "Light" : "Dark"} Mode
+            </button>
+          </div>
+
+          {/* Notifications */}
+          <div className="drawer-section">
+            <div className="drawer-section-title">
+              <Bell size={18} />
+              <span>Notifications</span>
+              <span className="mobile-notification-badge">3</span>
+            </div>
+            <Link to="/notifications" className="mobile-drawer-link" onClick={() => setIsHamburgerOpen(false)}>
+              View all notifications
+            </Link>
+          </div>
+
+          {/* Profile / User Section */}
+          <div className="drawer-section">
+            <div className="drawer-section-title">
+              <User size={18} />
+              <span>Profile</span>
+            </div>
+            <div className="mobile-profile-links">
+              <Link to="/profile" onClick={() => setIsHamburgerOpen(false)}>My Profile</Link>
+              <Link to="/bookings" onClick={() => setIsHamburgerOpen(false)}>My Bookings</Link>
+              <Link to="/wishlist" onClick={() => setIsHamburgerOpen(false)}>Wishlist</Link>
+              <Link to="/register" onClick={() => setIsHamburgerOpen(false)}>Register Business</Link>
+              <Link to="/login" onClick={() => setIsHamburgerOpen(false)}>Sign In</Link>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Overlay for mobile user drawer */}
-      {isMobileMenuOpen && <div className="mobile-overlay" onClick={() => setIsMobileMenuOpen(false)}></div>}
-
-      <style>{`
+      {/* Overlay for hamburger drawer */}
+      {isHamburgerOpen && <div className="mobile-overlay" onClick={() => setIsHamburgerOpen(false)}></div>}
+       <style>{`
         * {
           margin: 0;
           padding: 0;
@@ -272,17 +310,14 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           --font-serif: "Times New Roman", Times, Georgia, "EB Garamond", serif;
           --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
           
-          /* NEW BRAND COLORS */
+          /* BRAND COLORS */
           --primary: #006747;
           --primary-light: #008060;
           --primary-dim: #E6F4EF;
           --secondary: #EEF578;
           --secondary-dark: #E0E865;
           --accent: #E27AC0;
-          --accent-light: #E895CD;
-          --accent-dim: #FCE9F6;
           --mint: #D1EFE4;
-          --mint-dark: #B8E0D0;
           
           --dark: #1e2a2e;
           --gray: #5a6b6f;
@@ -320,10 +355,6 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           gap: 1rem;
         }
 
-        .mobile-only {
-          display: none;
-        }
-
         /* Logo */
         .logo-wrapper {
           display: flex;
@@ -331,6 +362,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           gap: 0.75rem;
           text-decoration: none;
           transition: var(--transition);
+          flex-shrink: 0;
         }
 
         .logo-icon {
@@ -364,8 +396,8 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           letter-spacing: 1px;
         }
 
-        /* Mobile Sidebar Trigger */
-        .mobile-sidebar-trigger {
+        /* Desktop Categories Button */
+        .nav-categories-btn {
           display: flex;
           align-items: center;
           gap: 0.5rem;
@@ -380,7 +412,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           transition: var(--transition);
         }
 
-        .mobile-sidebar-trigger:hover {
+        .nav-categories-btn:hover {
           background: var(--primary);
           color: white;
           border-color: var(--primary);
@@ -404,6 +436,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           font-size: 0.85rem;
           color: var(--dark);
           transition: var(--transition);
+          white-space: nowrap;
         }
 
         .location-selector-btn:hover {
@@ -416,8 +449,16 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           color: white;
         }
 
+        .location-text {
+          max-width: 120px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+        }
+
         .location-chevron {
           transition: transform 0.3s ease;
+          flex-shrink: 0;
         }
 
         .location-chevron.rotated {
@@ -432,7 +473,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           background: var(--white);
           border-radius: 16px;
           box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-          min-width: 220px;
+          min-width: 200px;
           overflow: hidden;
           z-index: 1001;
           animation: dropdownFade 0.2s ease;
@@ -512,6 +553,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           font-family: var(--font-sans);
           font-size: 0.85rem;
           outline: none;
+          min-width: 100px;
         }
 
         .desktop-search-btn {
@@ -524,6 +566,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           font-family: var(--font-sans);
           font-size: 0.8rem;
           transition: var(--transition);
+          white-space: nowrap;
         }
 
         .desktop-search-btn:hover {
@@ -535,6 +578,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           display: flex;
           align-items: center;
           gap: 0.5rem;
+          flex-shrink: 0;
         }
 
         .action-btn {
@@ -568,14 +612,6 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           padding: 0.1rem 0.3rem;
           border-radius: 10px;
           min-width: 16px;
-        }
-
-        .search-mobile-btn {
-          display: none;
-        }
-
-        .mobile-user-menu-btn {
-          display: none;
         }
 
         /* User Menu */
@@ -710,55 +746,13 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           color: white;
         }
 
-        /* Mobile Search Expandable */
-        .mobile-search-expandable {
-          max-height: 0;
-          overflow: hidden;
-          transition: max-height 0.4s ease, padding 0.3s ease;
-          background: var(--white);
-          border-top: 1px solid var(--gray-light);
-        }
-
-        .mobile-search-expandable.open {
-          max-height: 80px;
-          padding: 0.8rem 1rem;
-        }
-
-        .mobile-search-form {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          background: var(--mint);
-          border-radius: 40px;
-          padding: 0.2rem 0.2rem 0.2rem 1rem;
-        }
-
-        .mobile-search-input {
-          flex: 1;
-          background: none;
-          border: none;
-          padding: 0.6rem 0;
-          font-family: var(--font-sans);
-          font-size: 0.9rem;
-          outline: none;
-        }
-
-        .mobile-search-submit {
-          padding: 0.4rem 1rem;
-          background: var(--primary);
-          color: white;
-          border: none;
-          border-radius: 40px;
-          cursor: pointer;
-        }
-
-        /* Mobile User Drawer */
-        .mobile-user-drawer {
+        /* Mobile Hamburger Drawer */
+        .mobile-hamburger-drawer {
           position: fixed;
           top: 0;
           right: -100%;
           width: 85%;
-          max-width: 320px;
+          max-width: 400px;
           height: 100vh;
           background: var(--white);
           z-index: 1003;
@@ -768,11 +762,11 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           box-shadow: -2px 0 20px rgba(0, 0, 0, 0.1);
         }
 
-        .mobile-user-drawer.open {
+        .mobile-hamburger-drawer.open {
           right: 0;
         }
 
-        .mobile-drawer-header {
+        .drawer-header {
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -780,10 +774,11 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           border-bottom: 1px solid var(--gray-light);
         }
 
-        .user-info {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
+        .drawer-title {
+          font-family: var(--font-serif);
+          font-size: 1.2rem;
+          font-weight: 600;
+          color: var(--primary);
         }
 
         .close-drawer {
@@ -793,60 +788,129 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           color: var(--gray);
         }
 
-        .mobile-drawer-body {
+        .drawer-body {
           flex: 1;
-          padding: 1.5rem;
+          padding: 1rem 1.5rem;
+          overflow-y: auto;
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+        }
+
+        .drawer-section {
+          border-bottom: 1px solid var(--gray-light);
+          padding-bottom: 1rem;
+        }
+
+        .drawer-section:last-child {
+          border-bottom: none;
+        }
+
+        .drawer-section-title {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          font-family: var(--font-sans);
+          font-weight: 600;
+          color: var(--dark);
+          margin-bottom: 0.75rem;
+        }
+
+        .mobile-location-list {
           display: flex;
           flex-direction: column;
           gap: 0.5rem;
         }
 
-        .mobile-drawer-item {
-          display: flex;
-          align-items: center;
-          gap: 0.75rem;
-          padding: 0.8rem;
+        .mobile-location-item {
+          background: none;
+          border: none;
+          padding: 0.5rem 0;
+          text-align: left;
           font-family: var(--font-sans);
-          font-size: 1rem;
+          font-size: 0.9rem;
           color: var(--gray);
-          text-decoration: none;
-          border-radius: 12px;
+          cursor: pointer;
           transition: var(--transition);
         }
 
-        .mobile-drawer-item:hover {
-          background: var(--primary-dim);
+        .mobile-location-item.active {
           color: var(--primary);
-        }
-
-        .mobile-divider {
-          height: 1px;
-          background: var(--gray-light);
-          margin: 0.5rem 0;
-        }
-
-        .mobile-register-btn,
-        .mobile-login-btn {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          gap: 0.5rem;
-          padding: 0.8rem;
-          border-radius: 40px;
-          text-decoration: none;
-          font-family: var(--font-sans);
           font-weight: 500;
-          margin-top: 0.5rem;
         }
 
-        .mobile-register-btn {
-          background: var(--primary-dim);
-          color: var(--primary);
+        .mobile-search-form-drawer {
+          display: flex;
+          gap: 0.5rem;
+          background: var(--mint);
+          border-radius: 40px;
+          padding: 0.2rem 0.2rem 0.2rem 1rem;
+          border: 1px solid var(--gray-light);
         }
 
-        .mobile-login-btn {
+        .mobile-search-input-drawer {
+          flex: 1;
+          background: none;
+          border: none;
+          padding: 0.5rem 0;
+          font-family: var(--font-sans);
+          font-size: 0.85rem;
+          outline: none;
+        }
+
+        .mobile-search-submit-drawer {
+          padding: 0.3rem 1rem;
           background: var(--primary);
           color: white;
+          border: none;
+          border-radius: 40px;
+          cursor: pointer;
+        }
+
+        .mobile-theme-toggle {
+          background: var(--primary-dim);
+          border: none;
+          padding: 0.5rem 1rem;
+          border-radius: 40px;
+          font-family: var(--font-sans);
+          font-size: 0.8rem;
+          color: var(--primary);
+          cursor: pointer;
+        }
+
+        .mobile-notification-badge {
+          background: var(--primary);
+          color: white;
+          font-size: 0.7rem;
+          padding: 0.1rem 0.4rem;
+          border-radius: 20px;
+          margin-left: 0.5rem;
+        }
+
+        .mobile-drawer-link {
+          display: inline-block;
+          color: var(--primary);
+          text-decoration: none;
+          font-family: var(--font-sans);
+          font-size: 0.85rem;
+        }
+
+        .mobile-profile-links {
+          display: flex;
+          flex-direction: column;
+          gap: 0.75rem;
+        }
+
+        .mobile-profile-links a {
+          color: var(--gray);
+          text-decoration: none;
+          font-family: var(--font-sans);
+          font-size: 0.9rem;
+          transition: var(--transition);
+        }
+
+        .mobile-profile-links a:hover {
+          color: var(--primary);
         }
 
         .mobile-overlay {
@@ -865,38 +929,169 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           to { opacity: 1; }
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 1024px) {
-          .search-wrapper-desktop {
-            display: none;
-          }
+        /* Utility classes for responsive visibility */
+        .desktop-only {
+          display: flex;
+        }
 
-          .search-mobile-btn {
-            display: flex;
+        .mobile-only {
+          display: none !important;
+        }
+
+        /* ============================================ */
+        /* RESPONSIVE BREAKPOINTS */
+        /* ============================================ */
+
+        @media (max-width: 1024px) {
+          .desktop-only {
+            display: none !important;
           }
           
           .mobile-only {
-            display: flex;
-          }
-
-          .navbar-container {
-            padding: 0.8rem 1rem;
-          }
-
-          .location-selector-btn span {
-            display: none;
+            display: flex !important;
           }
           
-          .location-selector-btn {
-            padding: 0.5rem;
+          .navbar-container {
+            padding: 0.8rem 1rem;
+            gap: 0.5rem;
           }
+          
+          .logo-text {
+            display: flex !important;
+          }
+          
+          .logo-main {
+            font-size: 0.9rem;
+          }
+          
+          .logo-sub {
+            font-size: 0.6rem;
+          }
+          
+          .logo-icon {
+            font-size: 1.5rem;
+          }
+          
+          .nav-categories-btn {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+          }
+          
+          .hamburger-btn {
+            background: none;
+            border: none;
+            padding: 0.4rem;
+            cursor: pointer;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+          }
+        }
 
-          .user-menu-wrapper {
+        @media (max-width: 768px) {
+          body {
+            padding-top: 60px;
+          }
+          
+          .navbar-container {
+            padding: 0.6rem 0.8rem;
+          }
+          
+          .logo-text {
+            display: flex !important;
+          }
+          
+          .logo-main {
+            font-size: 0.8rem;
+          }
+          
+          .logo-sub {
+            font-size: 0.5rem;
+          }
+          
+          .logo-icon {
+            font-size: 1.3rem;
+          }
+          
+          .nav-categories-btn span {
             display: none;
           }
+          /* Fix mobile drawer text visibility */
+.mobile-hamburger-drawer,
+.mobile-hamburger-drawer * {
+  color: #1e2a2e !important; /* dark text for all elements */
+}
 
-          .mobile-user-menu-btn {
-            display: flex;
+.mobile-hamburger-drawer {
+  background: #ffffff !important; /* white background */
+}
+
+.drawer-title {
+  color: #006747 !important; /* keep brand color for title */
+}
+
+.drawer-section-title {
+  color: #1e2a2e !important;
+  font-weight: 600;
+}
+
+.mobile-location-item {
+  color: #5a6b6f !important;
+  background: transparent !important;
+}
+
+.mobile-location-item.active {
+  color: #006747 !important;
+  font-weight: 500;
+}
+
+.mobile-search-input-drawer {
+  color: #1e2a2e !important;
+  background: transparent !important;
+}
+
+.mobile-search-input-drawer::placeholder {
+  color: #a0a0a0 !important;
+}
+
+.mobile-theme-toggle {
+  color: #006747 !important;
+  background: #E6F4EF !important;
+}
+
+.mobile-notification-badge {
+  background: #006747 !important;
+  color: white !important;
+}
+
+.mobile-drawer-link {
+  color: #006747 !important;
+}
+
+.mobile-profile-links a {
+  color: #5a6b6f !important;
+}
+
+.mobile-profile-links a:hover {
+  color: #006747 !important;
+}
+
+.close-drawer svg {
+  color: #5a6b6f !important;
+}
+
+/* Ensure input text is dark */
+.mobile-search-input-drawer {
+  color: #1e2a2e !important;
+}
+          .nav-categories-btn {
+            padding: 0.4rem;
+          }
+          
+          .mobile-hamburger-drawer {
+            width: 100%;
+            max-width: none;
           }
         }
       `}</style>

@@ -140,7 +140,7 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
           <div className="sidebar-footer">
             <div className="premium-badge" onClick={handlePremiumClick}>
               <div className="premium-icon">
-                <Star size={20} fill="#b8860b" stroke="#b8860b" />
+                <Star size={20} fill="#006747" stroke="#006747" />
               </div>
               <div>
                 <div className="premium-title">Premium Listing</div>
@@ -156,13 +156,26 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
         .sidebar {
           --font-serif: "Times New Roman", Times, Georgia, "EB Garamond", serif;
           --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-          --gold: #b8860b;
-          --gold-light: #d4af37;
-          --gold-dim: #faf4e8;
+          
+          /* NEW BRAND COLORS */
+          --primary: #006747;
+          --primary-light: #008060;
+          --primary-dim: #E6F4EF;
+          --secondary: #EEF578;
+          --secondary-dark: #E0E865;
+          --accent: #E27AC0;
+          --accent-light: #E895CD;
+          --accent-dim: #FCE9F6;
+          --mint: #D1EFE4;
+          --mint-dark: #B8E0D0;
+          
           --dark: #1e2a2e;
           --gray: #5a6b6f;
           --gray-light: #e2ddd0;
           --white: #ffffff;
+          --shadow-sm: 0 4px 20px rgba(0, 103, 71, 0.08);
+          --shadow-md: 0 8px 30px rgba(0, 103, 71, 0.12);
+          --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           
           background: var(--white);
           border-right: 1px solid var(--gray-light);
@@ -172,7 +185,7 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
           flex-direction: column;
           overflow-y: auto;
           overflow-x: hidden;
-          box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+          box-shadow: var(--shadow-sm);
           height: 100%;
         }
 
@@ -196,6 +209,7 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
           border-right: none;
         }
 
+        /* Scrollbar */
         .sidebar::-webkit-scrollbar {
           width: 4px;
         }
@@ -205,33 +219,39 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
         }
 
         .sidebar::-webkit-scrollbar-thumb {
-          background: var(--gold-light);
+          background: var(--primary-light);
           border-radius: 4px;
         }
 
+        .sidebar::-webkit-scrollbar-thumb:hover {
+          background: var(--primary);
+        }
+
+        /* Close button for mobile */
         .sidebar-close-mobile {
           position: absolute;
           top: 1rem;
           right: 1rem;
           width: 32px;
           height: 32px;
-          background: var(--gold-dim);
+          background: var(--primary-dim);
           border: none;
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          color: var(--gold);
-          transition: all 0.3s ease;
+          color: var(--primary);
+          transition: var(--transition);
           z-index: 10;
         }
 
         .sidebar-close-mobile:hover {
-          background: var(--gold);
+          background: var(--primary);
           color: white;
         }
 
+        /* Toggle Button */
         .sidebar-toggle {
           position: absolute;
           right: -12px;
@@ -245,17 +265,18 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
           align-items: center;
           justify-content: center;
           cursor: pointer;
-          color: var(--gold);
-          transition: all 0.3s ease;
+          color: var(--primary);
+          transition: var(--transition);
           z-index: 10;
         }
 
         .sidebar-toggle:hover {
-          background: var(--gold-dim);
-          border-color: var(--gold);
+          background: var(--primary-dim);
+          border-color: var(--primary);
           transform: scale(1.05);
         }
 
+        /* Header */
         .sidebar-header {
           padding: 1.5rem 1rem 0.5rem 1rem;
         }
@@ -269,7 +290,7 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
 
         .sidebar-logo .logo-icon {
           font-size: 1.5rem;
-          color: var(--gold);
+          color: var(--primary);
           font-family: var(--font-serif);
         }
 
@@ -289,10 +310,11 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
         .sidebar-logo .logo-sub {
           font-family: var(--font-serif);
           font-size: 0.6rem;
-          color: var(--gold);
+          color: var(--primary);
           letter-spacing: 1px;
         }
 
+        /* Welcome Text */
         .sidebar-welcome {
           padding: 1rem 1rem;
           margin-bottom: 0.5rem;
@@ -312,6 +334,7 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
           color: var(--gray);
         }
 
+        /* Navigation */
         .sidebar-nav {
           flex: 1;
           padding: 0 0.5rem;
@@ -329,7 +352,7 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
           border: none;
           border-radius: 12px;
           cursor: pointer;
-          transition: all 0.2s ease;
+          transition: var(--transition);
           font-family: var(--font-sans);
           font-size: 0.9rem;
           color: var(--gray);
@@ -340,13 +363,13 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
         }
 
         .sidebar-item:hover {
-          background: var(--gold-dim);
-          color: var(--gold);
+          background: var(--primary-dim);
+          color: var(--primary);
         }
 
         .sidebar-item.active {
-          background: var(--gold-dim);
-          color: var(--gold);
+          background: var(--primary-dim);
+          color: var(--primary);
           font-weight: 500;
         }
 
@@ -358,7 +381,7 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
           transform: translateY(-50%);
           width: 3px;
           height: 60%;
-          background: var(--gold);
+          background: var(--primary);
           border-radius: 3px;
         }
 
@@ -386,10 +409,11 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
         }
 
         .sidebar-item.active .sidebar-count {
-          background: var(--gold-light);
+          background: var(--primary-light);
           color: white;
         }
 
+        /* Footer Premium Badge */
         .sidebar-footer {
           padding: 1rem;
           border-top: 1px solid var(--gray-light);
@@ -397,21 +421,22 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
         }
 
         .premium-badge {
-          background: linear-gradient(135deg, #fff8e7 0%, #fef3d6 100%);
-          border: 1px solid var(--gold-light);
+          background: linear-gradient(135deg, var(--mint) 0%, var(--primary-dim) 100%);
+          border: 1px solid var(--primary-light);
           border-radius: 12px;
           padding: 0.7rem;
           display: flex;
           align-items: center;
           gap: 0.75rem;
           cursor: pointer;
-          transition: all 0.3s ease;
+          transition: var(--transition);
           position: relative;
         }
 
         .premium-badge:hover {
           transform: translateY(-2px);
-          box-shadow: 0 4px 12px rgba(184, 134, 11, 0.15);
+          box-shadow: var(--shadow-md);
+          border-color: var(--primary);
         }
 
         .premium-icon {
@@ -424,7 +449,7 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
           font-family: var(--font-serif);
           font-size: 0.75rem;
           font-weight: 600;
-          color: var(--gold);
+          color: var(--primary);
         }
 
         .premium-subtitle {
@@ -435,7 +460,7 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
 
         .premium-arrow {
           margin-left: auto;
-          color: var(--gold);
+          color: var(--primary);
           opacity: 0.6;
         }
 
@@ -445,6 +470,7 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
           transition: transform 0.3s ease;
         }
 
+        /* Mobile specific adjustments */
         .sidebar.mobile .sidebar-header {
           padding: 1rem;
         }
@@ -457,6 +483,7 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
           margin-bottom: 1rem;
         }
 
+        /* Collapsed state */
         .sidebar.desktop.collapsed .sidebar-welcome {
           display: none;
         }
@@ -477,6 +504,13 @@ const Sidebar = ({ onCategoryChange, activeCategory, isMobile = false, onClose }
 
         .sidebar.desktop.collapsed .sidebar-count {
           display: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          .sidebar.desktop {
+            display: none;
+          }
         }
       `}</style>
     </>

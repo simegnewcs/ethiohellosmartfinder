@@ -31,73 +31,24 @@ const Hotels = () => {
   const amenitiesList = ["wifi", "parking", "swimmingPool", "breakfast"];
 
   const ethiopianCities = [
-    "Addis Ababa",
-    "Bahir Dar",
-    "Hawassa",
-    "Gonder",
-    "Dessie",
-    "Debre Birhan",
-    "Debre Markos",
-    "Adama",
-    "Jimma",
-    "Arba Minch",
-    "Lalibela",
-    "Axum",
-    "Harar",
-    "Dire Dawa",
-    "Mekelle",
-    "Shashamane",
-    "Soddo",
-    "Wolaita Sodo",
-    "Nekemte",
-    "Assosa",
-    "Gambela",
-    "Jijiga",
-    "Semera",
-    "Bule Hora",
-    "Dilla",
-    "Hossana",
-    "Debre Tabor",
-    "Debre Berhan",
-    "Sebeta",
-    "Burayu",
-    "Ambo",
-    "Woldia",
-    "Kombolcha",
-    "Bati",
-    "Kemise",
-    "Mettu",
-    "Bedele",
-    "Gimbi",
-    "Shire",
-    "Adigrat",
-    "Adwa",
-    "Humera",
+    "Addis Ababa", "Bahir Dar", "Hawassa", "Gonder", "Dessie",
+    "Debre Birhan", "Debre Markos", "Adama", "Jimma", "Arba Minch",
+    "Lalibela", "Axum", "Harar", "Dire Dawa", "Mekelle", "Shashamane",
+    "Soddo", "Wolaita Sodo", "Nekemte", "Assosa", "Gambela", "Jijiga",
+    "Semera", "Bule Hora", "Dilla", "Hossana", "Debre Tabor", "Debre Berhan",
+    "Sebeta", "Burayu", "Ambo", "Woldia", "Kombolcha", "Bati", "Kemise",
+    "Mettu", "Bedele", "Gimbi", "Shire", "Adigrat", "Adwa", "Humera",
   ].sort();
 
   const categoriesList = [
-    "Hotel",
-    "Resort",
-    "Lodge",
-    "Restaurant",
-    "Cafe",
-    "Coffee Shop",
-    "Guest House",
-    "Bed & Breakfast",
-    "Boutique Hotel",
-    "Eco Lodge",
-    "Spa & Wellness",
-    "Motel",
-    "Apartment",
-    "Vacation Rental",
-    "Camping Site",
+    "Hotel", "Resort", "Lodge", "Restaurant", "Cafe", "Coffee Shop",
+    "Guest House", "Bed & Breakfast", "Boutique Hotel", "Eco Lodge",
+    "Spa & Wellness", "Motel", "Apartment", "Vacation Rental", "Camping Site",
   ].sort();
 
   const toggleAmenity = (amenity: string) => {
     setSelectedAmenities((prev) =>
-      prev.includes(amenity)
-        ? prev.filter((a) => a !== amenity)
-        : [...prev, amenity]
+      prev.includes(amenity) ? prev.filter((a) => a !== amenity) : [...prev, amenity]
     );
   };
 
@@ -108,46 +59,23 @@ const Hotels = () => {
         hotel.city.toLowerCase().includes(search.toLowerCase()) ||
         hotel.description?.toLowerCase().includes(search.toLowerCase());
 
-      const matchesLocation =
-        location === "" || hotel.city.toLowerCase() === location.toLowerCase();
-
-      const matchesCategory =
-        category === "" ||
-        hotel.category.toLowerCase() === category.toLowerCase();
-
-      const matchesPrice =
-        hotel.price >= priceRange[0] && hotel.price <= priceRange[1];
+      const matchesLocation = location === "" || hotel.city.toLowerCase() === location.toLowerCase();
+      const matchesCategory = category === "" || hotel.category.toLowerCase() === category.toLowerCase();
+      const matchesPrice = hotel.price >= priceRange[0] && hotel.price <= priceRange[1];
 
       const matchesAmenities =
         selectedAmenities.length === 0 ||
-        selectedAmenities.every(
-          (amenity) => hotel[amenity as keyof typeof hotel] === true
-        );
+        selectedAmenities.every((amenity) => hotel[amenity as keyof typeof hotel] === true);
 
-      return (
-        matchesSearch &&
-        matchesLocation &&
-        matchesCategory &&
-        matchesPrice &&
-        matchesAmenities
-      );
+      return matchesSearch && matchesLocation && matchesCategory && matchesPrice && matchesAmenities;
     });
 
     switch (sortBy) {
-      case "price-asc":
-        filtered.sort((a, b) => a.price - b.price);
-        break;
-      case "price-desc":
-        filtered.sort((a, b) => b.price - a.price);
-        break;
-      case "rating":
-        filtered.sort((a, b) => b.rating - a.rating);
-        break;
-      case "name":
-        filtered.sort((a, b) => a.name.localeCompare(b.name));
-        break;
-      default:
-        filtered.sort((a, b) => b.rating - a.rating);
+      case "price-asc": filtered.sort((a, b) => a.price - b.price); break;
+      case "price-desc": filtered.sort((a, b) => b.price - a.price); break;
+      case "rating": filtered.sort((a, b) => b.rating - a.rating); break;
+      case "name": filtered.sort((a, b) => a.name.localeCompare(b.name)); break;
+      default: filtered.sort((a, b) => b.rating - a.rating);
     }
 
     return filtered;
@@ -163,9 +91,7 @@ const Hotels = () => {
   };
 
   const activeFiltersCount = [
-    location && true,
-    category && true,
-    selectedAmenities.length > 0 && true,
+    location && true, category && true, selectedAmenities.length > 0 && true,
     (priceRange[0] > 0 || priceRange[1] < 500) && true,
   ].filter(Boolean).length;
 
@@ -187,165 +113,64 @@ const Hotels = () => {
         {/* FILTER BAR */}
         <div className="filter-bar-full">
           <div className="filter-bar-container">
-            <div
-              className="filter-bar-header"
-              onClick={() =>
-                setIsFilterCollapsed(!isFilterCollapsed)
-              }
-            >
+            <div className="filter-bar-header" onClick={() => setIsFilterCollapsed(!isFilterCollapsed)}>
               <div className="filter-info">
                 <SlidersHorizontal size={18} />
                 <span className="filter-title">Filters & Sorting</span>
-
-                {activeFiltersCount > 0 && (
-                  <span className="filter-badge">
-                    {activeFiltersCount} active
-                  </span>
-                )}
+                {activeFiltersCount > 0 && <span className="filter-badge">{activeFiltersCount} active</span>}
               </div>
-
               <div className="filter-controls">
                 {activeFiltersCount > 0 && (
-                  <button
-                    className="clear-filters-btn"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      clearAllFilters();
-                    }}
-                  >
+                  <button className="clear-filters-btn" onClick={(e) => { e.stopPropagation(); clearAllFilters(); }}>
                     Clear all
                   </button>
                 )}
-
-                <button className="collapse-btn">
-                  {isFilterCollapsed ? "▼" : "▲"}
-                </button>
+                <button className="collapse-btn">{isFilterCollapsed ? "▼" : "▲"}</button>
               </div>
             </div>
 
-            <div
-              className={`filter-bar-body ${
-                isFilterCollapsed ? "collapsed" : "expanded"
-              }`}
-            >
+            <div className={`filter-bar-body ${isFilterCollapsed ? "collapsed" : "expanded"}`}>
               <div className="filters-grid-full">
                 {/* Search */}
                 <div className="filter-field">
-                  <label className="field-label">
-                    <Search size={16} /> Search
-                  </label>
-
-                  <input
-                    type="text"
-                    placeholder="Hotel name, city, or description..."
-                    value={search}
-                    onChange={(e) => setSearch(e.target.value)}
-                    className="field-input"
-                  />
+                  <label className="field-label"><Search size={16} /> Search</label>
+                  <input type="text" placeholder="Hotel name, city, or description..." value={search} onChange={(e) => setSearch(e.target.value)} className="field-input" />
                 </div>
 
                 {/* Location */}
                 <div className="filter-field">
-                  <label className="field-label">
-                    <MapPin size={16} /> Location (Ethiopia)
-                  </label>
-
-                  <select
-                    value={location}
-                    onChange={(e) => setLocation(e.target.value)}
-                    className="field-select"
-                  >
+                  <label className="field-label"><MapPin size={16} /> Location (Ethiopia)</label>
+                  <select value={location} onChange={(e) => setLocation(e.target.value)} className="field-select">
                     <option value="">All Ethiopian cities</option>
-
-                    {ethiopianCities.map((city) => (
-                      <option key={city} value={city}>
-                        {city}
-                      </option>
-                    ))}
+                    {ethiopianCities.map((city) => <option key={city} value={city}>{city}</option>)}
                   </select>
                 </div>
 
                 {/* Category */}
                 <div className="filter-field">
-                  <label className="field-label">
-                    <Tag size={16} /> Category
-                  </label>
-
-                  <select
-                    value={category}
-                    onChange={(e) => setCategory(e.target.value)}
-                    className="field-select"
-                  >
+                  <label className="field-label"><Tag size={16} /> Category</label>
+                  <select value={category} onChange={(e) => setCategory(e.target.value)} className="field-select">
                     <option value="">All types</option>
-
-                    {categoriesList.map((cat) => (
-                      <option key={cat} value={cat}>
-                        {cat}
-                      </option>
-                    ))}
+                    {categoriesList.map((cat) => <option key={cat} value={cat}>{cat}</option>)}
                   </select>
                 </div>
 
                 {/* Price */}
                 <div className="filter-field price-field">
-                  <label className="field-label">
-                    <DollarSign size={16} /> Max Price: ${priceRange[1]}
-                  </label>
-
-                  <input
-                    type="range"
-                    min="0"
-                    max="500"
-                    step="10"
-                    value={priceRange[1]}
-                    onChange={(e) =>
-                      setPriceRange([
-                        priceRange[0],
-                        parseInt(e.target.value),
-                      ])
-                    }
-                    className="price-slider-full"
-                  />
+                  <label className="field-label"><DollarSign size={16} /> Max Price: ${priceRange[1]}</label>
+                  <input type="range" min="0" max="500" step="10" value={priceRange[1]} onChange={(e) => setPriceRange([priceRange[0], parseInt(e.target.value)])} className="price-slider-full" />
                 </div>
 
                 {/* Amenities */}
                 <div className="filter-field amenities-field">
                   <label className="field-label">Amenities</label>
-
                   <div className="amenities-group-full">
                     {amenitiesList.map((amenity) => (
-                      <button
-                        key={amenity}
-                        className={`amenity-chip-full ${
-                          selectedAmenities.includes(amenity)
-                            ? "active"
-                            : ""
-                        }`}
-                        onClick={() => toggleAmenity(amenity)}
-                      >
-                        {amenity === "wifi" && (
-                          <>
-                            <Wifi size={16} /> Wi-Fi
-                          </>
-                        )}
-
-                        {amenity === "parking" && (
-                          <>
-                            <Car size={16} /> Parking
-                          </>
-                        )}
-
-                        {amenity === "swimmingPool" && (
-                          <>
-                            <Waves size={16} /> Pool
-                          </>
-                        )}
-
-                        {amenity === "breakfast" && (
-                          <>
-                            <UtensilsCrossed size={16} /> Breakfast
-                          </>
-                        )}
+                      <button key={amenity} className={`amenity-chip-full ${selectedAmenities.includes(amenity) ? "active" : ""}`} onClick={() => toggleAmenity(amenity)}>
+                        {amenity === "wifi" && <><Wifi size={16} /> Wi-Fi</>}
+                        {amenity === "parking" && <><Car size={16} /> Parking</>}
+                        {amenity === "swimmingPool" && <><Waves size={16} /> Pool</>}
+                        {amenity === "breakfast" && <><UtensilsCrossed size={16} /> Breakfast</>}
                       </button>
                     ))}
                   </div>
@@ -356,41 +181,16 @@ const Hotels = () => {
               <div className="controls-full">
                 <div className="sort-section">
                   <label className="sort-label">Sort by:</label>
-
-                  <select
-                    value={sortBy}
-                    onChange={(e) => setSortBy(e.target.value)}
-                    className="sort-select-full"
-                  >
+                  <select value={sortBy} onChange={(e) => setSortBy(e.target.value)} className="sort-select-full">
                     <option value="rating">Rating (Highest)</option>
-                    <option value="price-asc">
-                      Price: Low to High
-                    </option>
-                    <option value="price-desc">
-                      Price: High to Low
-                    </option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
                     <option value="name">Name: A to Z</option>
                   </select>
                 </div>
-
                 <div className="view-section">
-                  <button
-                    className={`view-btn-full ${
-                      viewMode === "grid" ? "active" : ""
-                    }`}
-                    onClick={() => setViewMode("grid")}
-                  >
-                    <Grid size={16} /> Grid
-                  </button>
-
-                  <button
-                    className={`view-btn-full ${
-                      viewMode === "list" ? "active" : ""
-                    }`}
-                    onClick={() => setViewMode("list")}
-                  >
-                    <List size={16} /> List
-                  </button>
+                  <button className={`view-btn-full ${viewMode === "grid" ? "active" : ""}`} onClick={() => setViewMode("grid")}><Grid size={16} /> Grid</button>
+                  <button className={`view-btn-full ${viewMode === "list" ? "active" : ""}`} onClick={() => setViewMode("list")}><List size={16} /> List</button>
                 </div>
               </div>
             </div>
@@ -399,123 +199,49 @@ const Hotels = () => {
 
         {/* RESULTS */}
         <div className="results-count-full">
-          <span className="count-number">
-            {filteredHotels.length}
-          </span>
-          <span className="count-text">
-            {" "}
-            places found across Ethiopia
-          </span>
+          <span className="count-number">{filteredHotels.length}</span>
+          <span className="count-text"> places found across Ethiopia</span>
         </div>
 
         <div className={`results-container-full ${viewMode}`}>
           {filteredHotels.length > 0 ? (
             filteredHotels.map((hotel, index) => (
-              <div
-                key={hotel.id}
-                className={`result-card-full ${viewMode}`}
-                style={{
-                  animationDelay: `${index * 0.05}s`,
-                }}
-              >
+              <div key={hotel.id} className={`result-card-full ${viewMode}`} style={{ animationDelay: `${index * 0.05}s` }}>
                 <div className="card-image-area-full">
-                  <img
-                    src={hotel.image}
-                    alt={hotel.name}
-                    className="card-img-full"
-                  />
-
-                  {hotel.rating >= 4.5 && (
-                    <span className="rating-badge-full">
-                      <Star size={14} /> {hotel.rating}
-                    </span>
-                  )}
-
-                  <span className="category-badge-full">
-                    {hotel.category}
-                  </span>
+                  <img src={hotel.image} alt={hotel.name} className="card-img-full" />
+                  {hotel.rating >= 4.5 && <span className="rating-badge-full"><Star size={14} /> {hotel.rating}</span>}
+                  <span className="category-badge-full">{hotel.category}</span>
                 </div>
-
                 <div className="card-details-full">
-                  <h3 className="hotel-title-full">
-                    {hotel.name}
-                  </h3>
-
-                  <p className="hotel-location-full">
-                    <MapPin size={15} /> {hotel.city}, Ethiopia
-                  </p>
-
+                  <h3 className="hotel-title-full">{hotel.name}</h3>
+                  <p className="hotel-location-full"><MapPin size={15} /> {hotel.city}, Ethiopia</p>
                   <div className="hotel-features-full">
-                    {hotel.wifi && (
-                      <span className="feature-full">
-                        <Wifi size={14} /> Wi-Fi
-                      </span>
-                    )}
-
-                    {hotel.parking && (
-                      <span className="feature-full">
-                        <Car size={14} /> Parking
-                      </span>
-                    )}
-
-                    {hotel.swimmingPool && (
-                      <span className="feature-full">
-                        <Waves size={14} /> Pool
-                      </span>
-                    )}
-
-                    {hotel.breakfast && (
-                      <span className="feature-full">
-                        <UtensilsCrossed size={14} /> Breakfast
-                      </span>
-                    )}
+                    {hotel.wifi && <span className="feature-full"><Wifi size={14} /> Wi-Fi</span>}
+                    {hotel.parking && <span className="feature-full"><Car size={14} /> Parking</span>}
+                    {hotel.swimmingPool && <span className="feature-full"><Waves size={14} /> Pool</span>}
+                    {hotel.breakfast && <span className="feature-full"><UtensilsCrossed size={14} /> Breakfast</span>}
                   </div>
-
                   {hotel.description && (
                     <p className="hotel-description-full">
-                      {hotel.description.substring(
-                        0,
-                        viewMode === "grid" ? 80 : 120
-                      )}
-                      ...
+                      {hotel.description.substring(0, viewMode === "grid" ? 80 : 120)}...
                     </p>
                   )}
-
                   <div className="card-footer-full">
                     <div className="price-wrapper-full">
-                      <span className="price-amount-full">
-                        ${hotel.price}
-                      </span>
-                      <span className="price-period-full">
-                        /night
-                      </span>
+                      <span className="price-amount-full">${hotel.price}</span>
+                      <span className="price-period-full">/night</span>
                     </div>
-
-                    <Link
-                      to={`/hotel/${hotel.id}`}
-                      className="details-link-full"
-                    >
-                      View Details →
-                    </Link>
+                    <Link to={`/hotel/${hotel.id}`} className="details-link-full">View Details →</Link>
                   </div>
                 </div>
               </div>
             ))
           ) : (
             <div className="empty-state-full">
-              <div className="empty-icon-full">
-                <Search size={30} />
-              </div>
-
+              <div className="empty-icon-full"><Search size={30} /></div>
               <h3>No places found</h3>
               <p>Try adjusting your filters</p>
-
-              <button
-                onClick={clearAllFilters}
-                className="empty-btn-full"
-              >
-                Clear all filters
-              </button>
+              <button onClick={clearAllFilters} className="empty-btn-full">Clear all filters</button>
             </div>
           )}
         </div>
@@ -523,44 +249,23 @@ const Hotels = () => {
 
       {/* MOBILE SHEET */}
       {isMobileFilterOpen && (
-        <div
-          className="mobile-sheet-overlay"
-          onClick={() => setIsMobileFilterOpen(false)}
-        >
-          <div
-            className="mobile-sheet"
-            onClick={(e) => e.stopPropagation()}
-          >
+        <div className="mobile-sheet-overlay" onClick={() => setIsMobileFilterOpen(false)}>
+          <div className="mobile-sheet" onClick={(e) => e.stopPropagation()}>
             <div className="mobile-sheet-header">
               <h3>Filters</h3>
-
-              <button
-                className="close-sheet"
-                onClick={() =>
-                  setIsMobileFilterOpen(false)
-                }
-              >
-                <X size={20} />
-              </button>
+              <button className="close-sheet" onClick={() => setIsMobileFilterOpen(false)}><X size={20} /></button>
             </div>
           </div>
         </div>
       )}
 
       {/* MOBILE BUTTON */}
-      <button
-        className="mobile-filter-trigger"
-        onClick={() => setIsMobileFilterOpen(true)}
-      >
+      <button className="mobile-filter-trigger" onClick={() => setIsMobileFilterOpen(true)}>
         <SlidersHorizontal size={18} />
         <span>Filters</span>
-
-        {activeFiltersCount > 0 && (
-          <span className="trigger-badge">
-            {activeFiltersCount}
-          </span>
-        )}
+        {activeFiltersCount > 0 && <span className="trigger-badge">{activeFiltersCount}</span>}
       </button>
+
       <style>{`
         * {
           margin: 0;
@@ -571,23 +276,30 @@ const Hotels = () => {
         .hotels-page-full {
           --font-serif: "Times New Roman", Times, Georgia, "EB Garamond", serif;
           --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-          --gold: #b8860b;
-          --gold-light: #d4af37;
-          --gold-dim: #faf4e8;
+          
+          /* NEW BRAND COLORS */
+          --primary: #006747;
+          --primary-light: #008060;
+          --primary-dim: #E6F4EF;
+          --secondary: #EEF578;
+          --secondary-dark: #E0E865;
+          --accent: #E27AC0;
+          --mint: #D1EFE4;
+          
           --dark: #1e2a2e;
           --gray: #5a6b6f;
           --gray-light: #e2ddd0;
-          --bg: #fefcf8;
+          --bg: var(--mint);
           --white: #ffffff;
-          --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-          --shadow-hover: 0 12px 32px rgba(0, 0, 0, 0.1);
+          --shadow: 0 4px 20px rgba(0, 103, 71, 0.08);
+          --shadow-hover: 0 12px 32px rgba(0, 103, 71, 0.12);
           --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* HERO FULL WIDTH */
         .hero-full {
           width: 100%;
-          background: linear-gradient(135deg, #1a2a35 0%, #0f1a20 100%);
+          background: linear-gradient(135deg, #003d2d 0%, #006747 100%);
           padding: 3rem 1rem;
           text-align: center;
         }
@@ -602,7 +314,7 @@ const Hotels = () => {
           font-size: 0.75rem;
           letter-spacing: 3px;
           text-transform: uppercase;
-          color: var(--gold-light);
+          color: var(--secondary);
         }
 
         .hero-title {
@@ -647,7 +359,7 @@ const Hotels = () => {
         }
 
         .filter-bar-header:hover {
-          background: rgba(0, 0, 0, 0.01);
+          background: rgba(0, 103, 71, 0.02);
         }
 
         .filter-info {
@@ -657,10 +369,6 @@ const Hotels = () => {
           flex-wrap: wrap;
         }
 
-        .filter-icon {
-          font-size: 1.2rem;
-        }
-
         .filter-title {
           font-family: var(--font-serif);
           font-weight: 600;
@@ -668,7 +376,7 @@ const Hotels = () => {
         }
 
         .filter-badge {
-          background: var(--gold);
+          background: var(--primary);
           color: white;
           padding: 0.2rem 0.6rem;
           border-radius: 20px;
@@ -685,7 +393,7 @@ const Hotels = () => {
         .clear-filters-btn {
           background: none;
           border: none;
-          color: var(--gold);
+          color: var(--primary);
           font-family: var(--font-sans);
           font-size: 0.8rem;
           cursor: pointer;
@@ -750,8 +458,8 @@ const Hotels = () => {
 
         .field-input:focus, .field-select:focus {
           outline: none;
-          border-color: var(--gold);
-          box-shadow: 0 0 0 3px rgba(184, 134, 11, 0.1);
+          border-color: var(--primary);
+          box-shadow: 0 0 0 3px rgba(0, 103, 71, 0.1);
         }
 
         .price-slider-full {
@@ -768,17 +476,8 @@ const Hotels = () => {
           width: 16px;
           height: 16px;
           border-radius: 50%;
-          background: var(--gold);
+          background: var(--primary);
           cursor: pointer;
-        }
-
-        .price-range-labels {
-          display: flex;
-          justify-content: space-between;
-          font-family: var(--font-sans);
-          font-size: 0.7rem;
-          color: var(--gray);
-          margin-top: 0.25rem;
         }
 
         .amenities-group-full {
@@ -799,12 +498,12 @@ const Hotels = () => {
         }
 
         .amenity-chip-full.active {
-          background: var(--gold-dim);
-          border-color: var(--gold);
+          background: var(--primary-dim);
+          border-color: var(--primary);
+          color: var(--primary);
           transform: scale(1.02);
         }
 
-        /* Controls */
         .controls-full {
           display: flex;
           justify-content: space-between;
@@ -850,8 +549,8 @@ const Hotels = () => {
         }
 
         .view-btn-full.active {
-          background: var(--gold);
-          border-color: var(--gold);
+          background: var(--primary);
+          border-color: var(--primary);
           color: white;
         }
 
@@ -868,7 +567,7 @@ const Hotels = () => {
         .count-number {
           font-weight: 700;
           font-size: 1.1rem;
-          color: var(--gold);
+          color: var(--primary);
         }
 
         /* Results Container */
@@ -890,7 +589,7 @@ const Hotels = () => {
           gap: 1rem;
         }
 
-        /* Cards with Animation */
+        /* Cards */
         .result-card-full {
           background: var(--white);
           border-radius: 16px;
@@ -903,10 +602,7 @@ const Hotels = () => {
         }
 
         @keyframes fadeInUp {
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+          to { opacity: 1; transform: translateY(0); }
         }
 
         .result-card-full:hover {
@@ -948,7 +644,7 @@ const Hotels = () => {
           position: absolute;
           top: 10px;
           right: 10px;
-          background: var(--gold);
+          background: var(--primary);
           color: white;
           padding: 0.2rem 0.6rem;
           border-radius: 20px;
@@ -998,7 +694,7 @@ const Hotels = () => {
         .feature-full {
           font-family: var(--font-sans);
           font-size: 0.7rem;
-          color: var(--gold);
+          color: var(--primary);
         }
 
         .hotel-description-full {
@@ -1022,7 +718,7 @@ const Hotels = () => {
           font-family: var(--font-serif);
           font-size: 1.2rem;
           font-weight: 700;
-          color: var(--gold);
+          color: var(--primary);
         }
 
         .price-period-full {
@@ -1039,7 +735,7 @@ const Hotels = () => {
         }
 
         .details-link-full:hover {
-          color: var(--gold);
+          color: var(--primary);
           transform: translateX(4px);
         }
 
@@ -1060,10 +756,16 @@ const Hotels = () => {
           margin-top: 1rem;
           padding: 0.5rem 1.5rem;
           background: none;
-          border: 1px solid var(--gold);
+          border: 1px solid var(--primary);
           border-radius: 30px;
-          color: var(--gold);
+          color: var(--primary);
           cursor: pointer;
+          transition: var(--transition);
+        }
+
+        .empty-btn-full:hover {
+          background: var(--primary);
+          color: white;
         }
 
         /* Mobile Filter Trigger */
@@ -1074,7 +776,7 @@ const Hotels = () => {
           display: none;
           align-items: center;
           gap: 0.5rem;
-          background: var(--gold);
+          background: var(--primary);
           color: white;
           border: none;
           padding: 0.75rem 1.25rem;
@@ -1093,7 +795,7 @@ const Hotels = () => {
 
         .trigger-badge {
           background: white;
-          color: var(--gold);
+          color: var(--primary);
           border-radius: 20px;
           padding: 0.1rem 0.5rem;
           font-size: 0.7rem;
@@ -1146,78 +848,6 @@ const Hotels = () => {
           border: none;
           font-size: 1.2rem;
           cursor: pointer;
-        }
-
-        .mobile-sheet-body {
-          flex: 1;
-          overflow-y: auto;
-          padding: 1rem;
-        }
-
-        .mobile-filter-field {
-          margin-bottom: 1rem;
-        }
-
-        .mobile-filter-field label {
-          display: block;
-          font-family: var(--font-sans);
-          font-size: 0.8rem;
-          font-weight: 600;
-          margin-bottom: 0.5rem;
-        }
-
-        .mobile-filter-field input,
-        .mobile-filter-field select {
-          width: 100%;
-          padding: 0.7rem;
-          border: 1px solid var(--gray-light);
-          border-radius: 12px;
-          font-family: var(--font-serif);
-        }
-
-        .mobile-amenities {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 0.5rem;
-        }
-
-        .mobile-amenity-btn {
-          padding: 0.4rem 1rem;
-          border: 1px solid var(--gray-light);
-          border-radius: 30px;
-          background: var(--white);
-          cursor: pointer;
-        }
-
-        .mobile-amenity-btn.active {
-          background: var(--gold-dim);
-          border-color: var(--gold);
-        }
-
-        .mobile-sheet-footer {
-          display: flex;
-          gap: 1rem;
-          padding: 1rem;
-          border-top: 1px solid var(--gray-light);
-        }
-
-        .mobile-clear-btn,
-        .mobile-apply-btn {
-          flex: 1;
-          padding: 0.7rem;
-          border-radius: 30px;
-          cursor: pointer;
-        }
-
-        .mobile-clear-btn {
-          background: none;
-          border: 1px solid var(--gray-light);
-        }
-
-        .mobile-apply-btn {
-          background: var(--gold);
-          border: none;
-          color: white;
         }
 
         /* RESPONSIVE */

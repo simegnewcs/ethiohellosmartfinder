@@ -16,11 +16,11 @@ import {
   Users,
   CreditCard,
   CheckCircle,
- 
-
   ArrowLeft,
   Share2,
-  Heart
+  Heart,
+  Clock,
+  Award,
 } from "lucide-react";
 
 const HotelDetails = () => {
@@ -51,7 +51,7 @@ const HotelDetails = () => {
     );
   }
 
-  // Sample room types - in real app would come from hotel data
+  // Room types based on hotel price
   const roomTypes = [
     { name: "Standard Single Room", price: hotel.price, capacity: 1, beds: "1 Single Bed" },
     { name: "Deluxe Double Room", price: hotel.price + 30, capacity: 2, beds: "1 King Bed" },
@@ -88,7 +88,7 @@ const HotelDetails = () => {
         <div className="main-image">
           <img src={hotel.image} alt={hotel.name} />
           <button className="wishlist-btn" onClick={() => setIsWishlisted(!isWishlisted)}>
-            <Heart size={22} fill={isWishlisted ? "#b8860b" : "none"} color={isWishlisted ? "#b8860b" : "white"} />
+            <Heart size={22} fill={isWishlisted ? "#006747" : "none"} color={isWishlisted ? "#006747" : "white"} />
           </button>
           <button className="share-btn">
             <Share2 size={18} color="white" />
@@ -117,10 +117,10 @@ const HotelDetails = () => {
             <h1 className="hotel-name">{hotel.name}</h1>
             <div className="location-rating">
               <span className="location">
-                <MapPin size={16} /> {hotel.city}, {hotel.location || "Ethiopia"}
+                <MapPin size={16} /> {hotel.city}, Ethiopia
               </span>
               <span className="rating">
-                <Star size={16} fill="#b8860b" color="#b8860b" />
+                <Star size={16} fill="#006747" stroke="#006747" />
                 {hotel.rating} / 5
                 <span className="review-count">(124 reviews)</span>
               </span>
@@ -201,14 +201,14 @@ const HotelDetails = () => {
               <div className="map-container">
                 <iframe
                   title="hotel-location"
-                  src={`https://www.google.com/maps?q=${hotel.city} ${hotel.location || 'Ethiopia'}&output=embed`}
+                  src={`https://www.google.com/maps?q=${hotel.city} Ethiopia&output=embed`}
                   width="100%"
                   height="300"
                   style={{ border: 0, borderRadius: "12px" }}
                   loading="lazy"
                 />
               </div>
-              <p className="map-address">{hotel.city}, {hotel.location || "Ethiopia"}</p>
+              <p className="map-address">{hotel.city}, Ethiopia</p>
             </div>
 
             {/* Contact Info */}
@@ -405,16 +405,23 @@ const HotelDetails = () => {
         .hotel-details-full {
           --font-serif: "Times New Roman", Times, Georgia, "EB Garamond", serif;
           --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-          --gold: #b8860b;
-          --gold-light: #d4af37;
-          --gold-dim: #faf4e8;
+          
+          /* NEW BRAND COLORS */
+          --primary: #006747;
+          --primary-light: #008060;
+          --primary-dim: #E6F4EF;
+          --secondary: #EEF578;
+          --secondary-dark: #E0E865;
+          --accent: #E27AC0;
+          --mint: #D1EFE4;
+          
           --dark: #1e2a2e;
           --gray: #5a6b6f;
           --gray-light: #e2ddd0;
-          --bg: #fefcf8;
+          --bg: var(--mint);
           --white: #ffffff;
-          --shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
-          --shadow-lg: 0 12px 32px rgba(0, 0, 0, 0.1);
+          --shadow: 0 4px 20px rgba(0, 103, 71, 0.08);
+          --shadow-lg: 0 12px 32px rgba(0, 103, 71, 0.12);
           --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
@@ -440,28 +447,19 @@ const HotelDetails = () => {
         }
 
         .back-button:hover {
-          background: var(--gold);
+          background: var(--primary);
           transform: translateX(-3px);
         }
 
         /* GALLERY */
-        .gallery-full {
-          width: 100%;
-        }
-
+        .gallery-full { width: 100%; }
         .main-image {
           position: relative;
           width: 100%;
           height: 60vh;
           overflow: hidden;
         }
-
-        .main-image img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
-
+        .main-image img { width: 100%; height: 100%; object-fit: cover; }
         .wishlist-btn, .share-btn {
           position: absolute;
           top: 20px;
@@ -473,19 +471,8 @@ const HotelDetails = () => {
           cursor: pointer;
           transition: var(--transition);
         }
-
-        .wishlist-btn {
-          right: 80px;
-        }
-
-        .share-btn {
-          right: 20px;
-        }
-
-        .wishlist-btn:hover, .share-btn:hover {
-          transform: scale(1.1);
-        }
-
+        .wishlist-btn { right: 80px; }
+        .share-btn { right: 20px; }
         .thumbnail-strip {
           display: flex;
           gap: 0.5rem;
@@ -493,7 +480,6 @@ const HotelDetails = () => {
           background: var(--white);
           overflow-x: auto;
         }
-
         .thumbnail {
           width: 80px;
           height: 60px;
@@ -503,17 +489,8 @@ const HotelDetails = () => {
           opacity: 0.6;
           transition: var(--transition);
         }
-
-        .thumbnail.active {
-          opacity: 1;
-          border: 2px solid var(--gold);
-        }
-
-        .thumbnail img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-        }
+        .thumbnail.active { opacity: 1; border: 2px solid var(--primary); }
+        .thumbnail img { width: 100%; height: 100%; object-fit: cover; }
 
         /* MAIN CONTENT */
         .details-main-full {
@@ -533,11 +510,10 @@ const HotelDetails = () => {
           padding-bottom: 1.5rem;
           border-bottom: 1px solid var(--gray-light);
         }
-
         .category-badge {
           display: inline-block;
-          background: var(--gold-dim);
-          color: var(--gold);
+          background: var(--primary-dim);
+          color: var(--primary);
           padding: 0.2rem 0.8rem;
           border-radius: 20px;
           font-family: var(--font-sans);
@@ -546,7 +522,6 @@ const HotelDetails = () => {
           text-transform: uppercase;
           margin-bottom: 0.5rem;
         }
-
         .hotel-name {
           font-family: var(--font-serif);
           font-size: clamp(1.5rem, 4vw, 2.2rem);
@@ -554,7 +529,6 @@ const HotelDetails = () => {
           color: var(--dark);
           margin-bottom: 0.5rem;
         }
-
         .location-rating {
           display: flex;
           flex-wrap: wrap;
@@ -563,30 +537,19 @@ const HotelDetails = () => {
           font-size: 0.85rem;
           color: var(--gray);
         }
-
-        .location, .rating {
-          display: flex;
-          align-items: center;
-          gap: 0.3rem;
-        }
-
-        .review-count {
-          margin-left: 0.3rem;
-          color: var(--gray);
-        }
-
+        .location, .rating { display: flex; align-items: center; gap: 0.3rem; }
+        .review-count { margin-left: 0.3rem; color: var(--gray); }
         .price-badge {
-          background: var(--gold-dim);
+          background: var(--primary-dim);
           padding: 0.8rem 1.5rem;
           border-radius: 16px;
           text-align: center;
         }
-
         .price-amount {
           font-family: var(--font-serif);
           font-size: 1.8rem;
           font-weight: 700;
-          color: var(--gold);
+          color: var(--primary);
         }
 
         /* TWO COLUMN LAYOUT */
@@ -597,19 +560,13 @@ const HotelDetails = () => {
         }
 
         /* LEFT COLUMN */
-        .details-left {
-          display: flex;
-          flex-direction: column;
-          gap: 1.5rem;
-        }
-
+        .details-left { display: flex; flex-direction: column; gap: 1.5rem; }
         .info-card {
           background: var(--white);
           border-radius: 20px;
           padding: 1.5rem;
           box-shadow: var(--shadow);
         }
-
         .info-card h2 {
           font-family: var(--font-serif);
           font-size: 1.3rem;
@@ -624,18 +581,16 @@ const HotelDetails = () => {
           line-height: 1.6;
           color: var(--gray);
         }
-
         .description-text.collapsed {
           display: -webkit-box;
           -webkit-line-clamp: 3;
           -webkit-box-orient: vertical;
           overflow: hidden;
         }
-
         .read-more-btn {
           background: none;
           border: none;
-          color: var(--gold);
+          color: var(--primary);
           font-family: var(--font-sans);
           font-size: 0.8rem;
           cursor: pointer;
@@ -648,7 +603,6 @@ const HotelDetails = () => {
           grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
           gap: 1rem;
         }
-
         .amenity-card {
           display: flex;
           align-items: center;
@@ -657,46 +611,23 @@ const HotelDetails = () => {
           background: var(--bg);
           border-radius: 12px;
         }
-
-        .amenity-card.unavailable {
-          opacity: 0.5;
-        }
-
+        .amenity-card.unavailable { opacity: 0.5; }
         .amenity-icon {
           width: 40px;
           height: 40px;
           display: flex;
           align-items: center;
           justify-content: center;
-          background: var(--gold-dim);
+          background: var(--primary-dim);
           border-radius: 12px;
-          color: var(--gold);
+          color: var(--primary);
         }
-
-        .amenity-info {
-          display: flex;
-          flex-direction: column;
-        }
-
-        .amenity-label {
-          font-family: var(--font-sans);
-          font-weight: 600;
-          font-size: 0.85rem;
-        }
-
-        .amenity-status {
-          font-family: var(--font-sans);
-          font-size: 0.7rem;
-          color: var(--gray);
-        }
+        .amenity-info { display: flex; flex-direction: column; }
+        .amenity-label { font-family: var(--font-sans); font-weight: 600; font-size: 0.85rem; }
+        .amenity-status { font-family: var(--font-sans); font-size: 0.7rem; color: var(--gray); }
 
         /* ROOM TYPES */
-        .room-types {
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-
+        .room-types { display: flex; flex-direction: column; gap: 0.75rem; }
         .room-card {
           display: flex;
           justify-content: space-between;
@@ -706,64 +637,27 @@ const HotelDetails = () => {
           border-radius: 12px;
           transition: var(--transition);
         }
-
-        .room-card:hover {
-          background: var(--gold-dim);
-        }
-
-        .room-info h3 {
-          font-family: var(--font-serif);
-          font-size: 1rem;
-          margin-bottom: 0.25rem;
-        }
-
-        .room-info p {
-          font-family: var(--font-sans);
-          font-size: 0.7rem;
-          color: var(--gray);
-        }
-
-        .room-price .price {
-          font-family: var(--font-serif);
-          font-weight: 700;
-          color: var(--gold);
-        }
-
+        .room-card:hover { background: var(--primary-dim); }
+        .room-info h3 { font-family: var(--font-serif); font-size: 1rem; margin-bottom: 0.25rem; }
+        .room-info p { font-family: var(--font-sans); font-size: 0.7rem; color: var(--gray); }
+        .room-price .price { font-family: var(--font-serif); font-weight: 700; color: var(--primary); }
         .select-room-btn {
           padding: 0.4rem 1rem;
           background: none;
-          border: 1px solid var(--gold);
+          border: 1px solid var(--primary);
           border-radius: 30px;
-          color: var(--gold);
+          color: var(--primary);
           cursor: pointer;
           transition: var(--transition);
         }
-
-        .select-room-btn:hover {
-          background: var(--gold);
-          color: white;
-        }
+        .select-room-btn:hover { background: var(--primary); color: white; }
 
         /* MAP */
-        .map-container {
-          border-radius: 12px;
-          overflow: hidden;
-        }
-
-        .map-address {
-          font-family: var(--font-sans);
-          font-size: 0.8rem;
-          color: var(--gray);
-          margin-top: 0.5rem;
-        }
+        .map-container { border-radius: 12px; overflow: hidden; }
+        .map-address { font-family: var(--font-sans); font-size: 0.8rem; color: var(--gray); margin-top: 0.5rem; }
 
         /* CONTACT */
-        .contact-grid {
-          display: flex;
-          flex-direction: column;
-          gap: 0.75rem;
-        }
-
+        .contact-grid { display: flex; flex-direction: column; gap: 0.75rem; }
         .contact-item {
           display: flex;
           align-items: center;
@@ -774,10 +668,7 @@ const HotelDetails = () => {
         }
 
         /* RIGHT COLUMN - STICKY BOOKING CARD */
-        .details-right {
-          position: relative;
-        }
-
+        .details-right { position: relative; }
         .booking-card-sticky {
           position: sticky;
           top: 20px;
@@ -786,32 +677,10 @@ const HotelDetails = () => {
           padding: 1.5rem;
           box-shadow: var(--shadow-lg);
         }
-
-        .booking-header h3 {
-          font-family: var(--font-serif);
-          font-size: 1.3rem;
-          margin-bottom: 0.25rem;
-        }
-
-        .booking-header p {
-          font-family: var(--font-sans);
-          font-size: 0.75rem;
-          color: var(--gray);
-          margin-bottom: 1rem;
-        }
-
-        .booking-form-compact {
-          display: flex;
-          flex-direction: column;
-          gap: 0.8rem;
-        }
-
-        .form-field {
-          display: flex;
-          flex-direction: column;
-          gap: 0.3rem;
-        }
-
+        .booking-header h3 { font-family: var(--font-serif); font-size: 1.3rem; margin-bottom: 0.25rem; }
+        .booking-header p { font-family: var(--font-sans); font-size: 0.75rem; color: var(--gray); margin-bottom: 1rem; }
+        .booking-form-compact { display: flex; flex-direction: column; gap: 0.8rem; }
+        .form-field { display: flex; flex-direction: column; gap: 0.3rem; }
         .form-field label {
           font-family: var(--font-sans);
           font-size: 0.7rem;
@@ -820,40 +689,19 @@ const HotelDetails = () => {
           align-items: center;
           gap: 0.3rem;
         }
-
         .form-field input, .form-field select {
           padding: 0.6rem;
           border: 1px solid var(--gray-light);
           border-radius: 10px;
           font-family: var(--font-serif);
         }
-
-        .price-breakdown {
-          margin-top: 0.5rem;
-          padding-top: 0.5rem;
-          border-top: 1px solid var(--gray-light);
-        }
-
-        .breakdown-row {
-          display: flex;
-          justify-content: space-between;
-          font-family: var(--font-sans);
-          font-size: 0.8rem;
-          padding: 0.2rem 0;
-        }
-
-        .breakdown-row.total {
-          font-weight: 700;
-          color: var(--gold);
-          border-top: 1px solid var(--gray-light);
-          margin-top: 0.3rem;
-          padding-top: 0.5rem;
-        }
-
+        .price-breakdown { margin-top: 0.5rem; padding-top: 0.5rem; border-top: 1px solid var(--gray-light); }
+        .breakdown-row { display: flex; justify-content: space-between; font-family: var(--font-sans); font-size: 0.8rem; padding: 0.2rem 0; }
+        .breakdown-row.total { font-weight: 700; color: var(--primary); border-top: 1px solid var(--gray-light); margin-top: 0.3rem; padding-top: 0.5rem; }
         .book-now-btn {
           width: 100%;
           padding: 0.8rem;
-          background: var(--gold);
+          background: var(--primary);
           color: white;
           border: none;
           border-radius: 40px;
@@ -866,17 +714,8 @@ const HotelDetails = () => {
           justify-content: center;
           gap: 0.5rem;
         }
-
-        .book-now-btn:disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
-        }
-
-        .book-now-btn:hover:not(:disabled) {
-          background: #9a7209;
-          transform: translateY(-2px);
-        }
-
+        .book-now-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .book-now-btn:hover:not(:disabled) { background: var(--primary-light); transform: translateY(-2px); }
         .booking-guarantee {
           display: flex;
           align-items: center;
@@ -903,7 +742,6 @@ const HotelDetails = () => {
           padding: 1rem;
           animation: fadeIn 0.3s ease;
         }
-
         .modal-content {
           background: var(--white);
           border-radius: 24px;
@@ -914,7 +752,6 @@ const HotelDetails = () => {
           position: relative;
           animation: slideUp 0.3s ease;
         }
-
         .modal-close {
           position: absolute;
           top: 15px;
@@ -926,82 +763,31 @@ const HotelDetails = () => {
           border-radius: 50%;
           cursor: pointer;
         }
-
-        .modal-header {
-          padding: 1.5rem;
-          border-bottom: 1px solid var(--gray-light);
-        }
-
-        .modal-header h2 {
-          font-family: var(--font-serif);
-          margin-bottom: 0.25rem;
-        }
-
-        .modal-body {
-          padding: 1.5rem;
-        }
-
-        .reservation-form {
-          display: flex;
-          flex-direction: column;
-          gap: 1rem;
-        }
-
-        .form-row {
-          display: grid;
-          grid-template-columns: 1fr 1fr;
-          gap: 1rem;
-        }
-
-        .form-group {
-          display: flex;
-          flex-direction: column;
-          gap: 0.3rem;
-        }
-
-        .form-group label {
-          font-family: var(--font-sans);
-          font-size: 0.75rem;
-          font-weight: 600;
-        }
-
+        .modal-header { padding: 1.5rem; border-bottom: 1px solid var(--gray-light); }
+        .modal-header h2 { font-family: var(--font-serif); margin-bottom: 0.25rem; }
+        .modal-body { padding: 1.5rem; }
+        .reservation-form { display: flex; flex-direction: column; gap: 1rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.3rem; }
+        .form-group label { font-family: var(--font-sans); font-size: 0.75rem; font-weight: 600; }
         .form-group input, .form-group textarea, .form-group select {
           padding: 0.6rem;
           border: 1px solid var(--gray-light);
           border-radius: 10px;
           font-family: var(--font-serif);
         }
-
         .payment-summary {
           background: var(--bg);
           padding: 1rem;
           border-radius: 12px;
         }
-
-        .payment-summary h4 {
-          font-family: var(--font-serif);
-          margin-bottom: 0.5rem;
-        }
-
-        .summary-row {
-          display: flex;
-          justify-content: space-between;
-          font-size: 0.85rem;
-          padding: 0.3rem 0;
-        }
-
-        .summary-row.total {
-          font-weight: 700;
-          color: var(--gold);
-          border-top: 1px solid var(--gray-light);
-          margin-top: 0.3rem;
-          padding-top: 0.5rem;
-        }
-
+        .payment-summary h4 { font-family: var(--font-serif); margin-bottom: 0.5rem; }
+        .summary-row { display: flex; justify-content: space-between; font-size: 0.85rem; padding: 0.3rem 0; }
+        .summary-row.total { font-weight: 700; color: var(--primary); border-top: 1px solid var(--gray-light); margin-top: 0.3rem; padding-top: 0.5rem; }
         .confirm-reservation-btn {
           width: 100%;
           padding: 0.8rem;
-          background: var(--gold);
+          background: var(--primary);
           color: white;
           border: none;
           border-radius: 40px;
@@ -1015,95 +801,32 @@ const HotelDetails = () => {
         }
 
         /* NOT FOUND */
-        .not-found-full {
-          min-height: 80vh;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          background: var(--bg);
-        }
-
-        .not-found-content {
-          text-align: center;
-        }
-
-        .not-found-icon {
-          font-size: 4rem;
-        }
-
-        .back-btn {
-          margin-top: 1rem;
-          padding: 0.6rem 1.5rem;
-          background: var(--gold);
-          color: white;
-          border: none;
-          border-radius: 40px;
-          cursor: pointer;
-        }
+        .not-found-full { min-height: 80vh; display: flex; align-items: center; justify-content: center; background: var(--bg); }
+        .not-found-content { text-align: center; }
+        .not-found-icon { font-size: 4rem; }
+        .back-btn { margin-top: 1rem; padding: 0.6rem 1.5rem; background: var(--primary); color: white; border: none; border-radius: 40px; cursor: pointer; }
 
         /* ANIMATIONS */
-        @keyframes fadeIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-
-        @keyframes slideUp {
-          from { transform: translateY(50px); opacity: 0; }
-          to { transform: translateY(0); opacity: 1; }
-        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
 
         /* RESPONSIVE */
         @media (max-width: 1024px) {
-          .details-two-columns {
-            grid-template-columns: 1fr;
-          }
-
-          .details-right {
-            order: -1;
-          }
-
-          .booking-card-sticky {
-            position: relative;
-            top: 0;
-          }
+          .details-two-columns { grid-template-columns: 1fr; }
+          .details-right { order: -1; }
+          .booking-card-sticky { position: relative; top: 0; }
         }
-
         @media (max-width: 768px) {
-          .details-header {
-            flex-direction: column;
-          }
-
-          .form-row {
-            grid-template-columns: 1fr;
-          }
-
-          .amenities-grid-full {
-            grid-template-columns: 1fr 1fr;
-          }
-
-          .main-image {
-            height: 40vh;
-          }
-
-          .thumbnail-strip {
-            justify-content: center;
-          }
+          .details-header { flex-direction: column; }
+          .form-row { grid-template-columns: 1fr; }
+          .amenities-grid-full { grid-template-columns: 1fr 1fr; }
+          .main-image { height: 40vh; }
+          .thumbnail-strip { justify-content: center; }
         }
-
         @media (max-width: 480px) {
-          .amenities-grid-full {
-            grid-template-columns: 1fr;
-          }
-
-          .room-card {
-            flex-direction: column;
-            text-align: center;
-            gap: 0.5rem;
-          }
-
-          .back-button span {
-            display: none;
-          }
+          .amenities-grid-full { grid-template-columns: 1fr; }
+          .room-card { flex-direction: column; text-align: center; gap: 0.5rem; }
+          .back-button span { display: none; }
         }
       `}</style>
     </div>

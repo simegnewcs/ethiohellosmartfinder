@@ -172,7 +172,7 @@ const Home = () => {
 
   return (
     <div className="home-page">
-      {/* HERO SECTION with Search */}
+      {/* HERO SECTION - Full Width */}
       <section className="hero-section">
         <div className="hero-overlay"></div>
         <div className="hero-container">
@@ -252,9 +252,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CATEGORIES SECTION */}
+      {/* CATEGORIES SECTION - Full Width */}
       <section className="categories-section">
-        <div className="container">
+        <div className="container-full">
           <div className="section-header">
             <span className="section-label">Browse By Category</span>
             <h2 className="section-title">Explore Places by Category</h2>
@@ -279,9 +279,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* FEATURED HOTELS SECTION */}
+      {/* FEATURED HOTELS SECTION - Full Width */}
       <section className="featured-section">
-        <div className="container">
+        <div className="container-full">
           <div className="section-header">
             <span className="section-label">Top Rated</span>
             <h2 className="section-title">Featured Hotels</h2>
@@ -319,9 +319,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* FEATURED RESTAURANTS SECTION */}
+      {/* FEATURED RESTAURANTS SECTION - Full Width */}
       <section className="restaurants-section">
-        <div className="container">
+        <div className="container-full">
           <div className="section-header">
             <span className="section-label">Popular Eateries</span>
             <h2 className="section-title">Top Restaurants</h2>
@@ -362,9 +362,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* WHY CHOOSE US SECTION */}
+      {/* WHY CHOOSE US SECTION - Full Width */}
       <section className="why-choose-section">
-        <div className="container">
+        <div className="container-full">
           <div className="why-choose-grid">
             <div className="why-choose-content">
               <span className="section-label">Why Choose Us</span>
@@ -421,9 +421,9 @@ const Home = () => {
         </div>
       </section>
 
-      {/* CALL TO ACTION SECTION */}
+      {/* CALL TO ACTION SECTION - Full Width */}
       <section className="cta-section">
-        <div className="container">
+        <div className="container-full">
           <div className="cta-content">
             <h2>List Your Business With Us</h2>
             <p>Join hundreds of businesses already growing with HelloET.com</p>
@@ -440,21 +440,16 @@ const Home = () => {
           --font-serif: "Times New Roman", Times, Georgia, Garamond, serif;
           --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
           
-          /* NEW BRAND COLORS */
+          /* BRAND COLORS */
           --color-primary: #006747;
           --color-primary-light: #008060;
           --color-primary-dim: #E6F4EF;
           --color-secondary: #EEF578;
           --color-secondary-dark: #E0E865;
           --color-accent: #E27AC0;
-          --color-accent-light: #E895CD;
-          --color-accent-dim: #FCE9F6;
           --color-mint: #D1EFE4;
-          --color-mint-dark: #B8E0D0;
           
           --color-dark: #1a1a1a;
-          --color-charcoal: #2c2c2c;
-          --color-cream: #FAF9F5;
           --color-white: #ffffff;
           --color-gray: #6b7b7e;
           --color-gray-light: #e8e2d4;
@@ -465,9 +460,9 @@ const Home = () => {
           --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Container */
-        .container {
-          max-width: 1280px;
+        /* Full Width Container - NO MARGINS */
+        .container-full {
+          max-width: 1400px;
           margin: 0 auto;
           padding: 0 2rem;
         }
@@ -505,9 +500,10 @@ const Home = () => {
           color: var(--color-gray);
         }
 
-        /* HERO SECTION */
+        /* HERO SECTION - Full Width Edge to Edge */
         .hero-section {
           position: relative;
+          width: 100%;
           min-height: 85vh;
           display: flex;
           align-items: center;
@@ -536,8 +532,8 @@ const Home = () => {
         .hero-container {
           position: relative;
           z-index: 2;
-          max-width: 1280px;
-          width: 90%;
+          max-width: 1400px;
+          width: 100%;
           margin: 0 auto;
           padding: 4rem 2rem;
         }
@@ -732,8 +728,9 @@ const Home = () => {
           opacity: 0.8;
         }
 
-        /* Categories Section */
+        /* Categories Section - Full Width */
         .categories-section {
+          width: 100%;
           padding: 5rem 0;
           background: var(--color-white);
         }
@@ -795,9 +792,10 @@ const Home = () => {
           transform: translateX(4px);
         }
 
-        /* Featured Sections */
+        /* Featured Sections - Full Width */
         .featured-section,
         .restaurants-section {
+          width: 100%;
           padding: 4rem 0;
           background: var(--color-mint);
         }
@@ -927,8 +925,9 @@ const Home = () => {
           color: var(--color-primary-light);
         }
 
-        /* Why Choose Us */
+        /* Why Choose Us - Full Width */
         .why-choose-section {
+          width: 100%;
           padding: 5rem 0;
           background: linear-gradient(135deg, #FAF9F5 0%, #F5F4EF 100%);
         }
@@ -983,8 +982,9 @@ const Home = () => {
           box-shadow: var(--shadow-lg);
         }
 
-        /* CTA Section */
+        /* CTA Section - Full Width */
         .cta-section {
+          width: 100%;
           padding: 5rem 0;
           background: linear-gradient(135deg, var(--color-primary) 0%, #004d33 100%);
           text-align: center;
@@ -1072,15 +1072,15 @@ const Home = () => {
           .search-btn-hero {
             width: 100%;
           }
+          
+          .container-full {
+            padding: 0 1rem;
+          }
         }
 
         @media (max-width: 480px) {
           .hero-title {
             font-size: 1.8rem;
-          }
-
-          .container {
-            padding: 0 1rem;
           }
 
           .featured-grid {
@@ -1098,6 +1098,10 @@ const Home = () => {
           
           .stat-number {
             font-size: 1.5rem;
+          }
+          
+          .container-full {
+            padding: 0 0.75rem;
           }
         }
       `}</style>
