@@ -31,7 +31,7 @@ const ShoppingCenterDetails = () => {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [isWishlisted, setIsWishlisted] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const [selectedEvent, setSelectedEvent] = useState("");
+  
 
   const center = shoppingCenters.find((item) => item.id === Number(id));
 

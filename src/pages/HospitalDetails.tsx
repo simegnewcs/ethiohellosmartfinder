@@ -5,7 +5,7 @@ import {
   Wifi,
   Car,
   Clock,
-  Phone,
+ 
   MapPin,
   X,
   Calendar,

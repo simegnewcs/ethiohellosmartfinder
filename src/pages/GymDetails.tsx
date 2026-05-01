@@ -4,7 +4,7 @@ import { gyms } from "../data/gyms";
 import {
  
   Clock,
-  Phone,
+ 
   MapPin,
   X,
   

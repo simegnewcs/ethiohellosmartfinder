@@ -30,13 +30,13 @@ const Bars = () => {
     "Adama", "Jimma", "Dire Dawa", "Mekelle", "Shashamane", "Nekemte"
   ].sort();
 
-  const barTypesList = [
-    "Sports Bar", "Irish Pub", "Sports Bar", "Pub", "Pub", "Sports Bar",
-    "Sports Bar",
-    "Sports Bar",
-    "Sports Bar",
-    "Sports Bar"
-  ];
+  // const barTypesList = [
+  //   "Sports Bar", "Irish Pub", "Sports Bar", "Pub", "Pub", "Sports Bar",
+  //   "Sports Bar",
+  //   "Sports Bar",
+  //   "Sports Bar",
+  //   "Sports Bar"
+  // ];
 
   const toggleService = (service: string) => {
     setSelectedServices((prev) =>

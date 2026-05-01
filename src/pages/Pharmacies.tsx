@@ -4,19 +4,17 @@ import { Link } from "react-router-dom";
 import {
   Search,
   MapPin,
-  Tag,
-  DollarSign,
+ 
   Pill,
   Clock,
   Truck,
   Phone,
-  Stethoscope,
+ 
   SlidersHorizontal,
   Grid,
   List,
   Star,
-  Shield,
-  Heart,
+  
   AlertCircle,
 } from "lucide-react";
 

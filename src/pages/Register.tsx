@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { 
   Building2, 
-  MapPin, 
-  Tag, 
+ 
   Phone, 
-  Mail, 
-  Globe,
+ 
   Wifi,
   Car,
   Coffee,
@@ -18,7 +16,7 @@ import {
   ChevronLeft,
   Star,
   Camera,
-  Trash2
+  
 } from "lucide-react";
 
 const Register = () => {
