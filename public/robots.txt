@@ -1,0 +1,9 @@
+# https://helloet.devvoltz.com/robots.txt
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /api/
+
+Sitemap: https://helloet.devvoltz.com/sitemap.xml
+Host: https://helloet.devvoltz.com

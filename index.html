@@ -1,13 +1,195 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>frontend</title>
+    
+    <!-- PRIMARY META TAGS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#b8860b" />
+    <meta name="author" content="EthioHello" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+    <meta name="googlebot" content="index, follow" />
+    
+    <!-- SEO TITLE & DESCRIPTION -->
+    <title>EthioHello | Find the Best Hotels, Restaurants, Coffee Houses & Services in Ethiopia</title>
+    <meta name="description" content="Discover Ethiopia's top-rated hotels, authentic restaurants, traditional coffee houses, supermarkets, pharmacies, gyms, and local services. Read trusted reviews, compare prices, and find your perfect spot in Addis Ababa and across Ethiopia today!" />
+    <meta name="keywords" content="Ethiopia hotels, Addis Ababa restaurants, Ethiopian coffee houses, best places in Ethiopia, EthioHello, Smart Finder Ethiopia, hotels in Addis, traditional Ethiopian food, coffee ceremony Ethiopia, business directory Ethiopia, local services Ethiopia, Ethiopian travel guide" />
+    
+    <!-- CANONICAL URL -->
+    <link rel="canonical" href="https://helloet.devvoltz.com/" />
+    
+    <!-- OPEN GRAPH / FACEBOOK -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://helloet.devvoltz.com/" />
+    <meta property="og:title" content="EthioHello – Discover Ethiopia's Best Places" />
+    <meta property="og:description" content="Find the finest hotels, restaurants, coffee houses, and services across Ethiopia. Trusted reviews by locals. ✦" />
+    <meta property="og:image" content="https://helloet.devvoltz.com/og-image.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:site_name" content="EthioHello" />
+    
+    <!-- TWITTER CARD -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:url" content="https://helloet.devvoltz.com/" />
+    <meta name="twitter:title" content="EthioHello – Discover Ethiopia's Best Places" />
+    <meta name="twitter:description" content="Your trusted guide to the best hotels, restaurants, and services across Ethiopia. Explore now! ✦" />
+    <meta name="twitter:image" content="https://helloet.devvoltz.com/twitter-image.jpg" />
+    
+    <!-- GEO TAGS (Ethiopia focused) -->
+    <meta name="geo.region" content="ET" />
+    <meta name="geo.placename" content="Ethiopia" />
+    <meta name="geo.position" content="9.02497;38.74689" />
+    <meta name="ICBM" content="9.02497, 38.74689" />
+    
+    <!-- LANGUAGE ALTERNATES -->
+    <link rel="alternate" href="https://helloet.devvoltz.com/" hreflang="en" />
+    <link rel="alternate" href="https://helloet.devvoltz.com/am" hreflang="am" />
+    
+    <!-- PRELOAD & PERFORMANCE -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://images.unsplash.com" />
+    <link rel="dns-prefetch" href="https://placehold.co" />
+    
+    <!-- SITEMAP -->
+    <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+    
+    <!-- STRUCTURED DATA (JSON-LD) for Local Business Directory -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "EthioHello",
+      "alternateName": "Smart Hotel Finder",
+      "url": "https://helloet.devvoltz.com/",
+      "logo": "https://helloet.devvoltz.com/logo.png",
+      "image": "https://helloet.devvoltz.com/og-image.jpg",
+      "description": "Discover Ethiopia's best hotels, restaurants, coffee houses, supermarkets, pharmacies, gyms, shopping centers, bars, and hospitals. Your trusted local discovery platform.",
+      "address": {
+        "@type": "PostalAddress",
+        "addressCountry": "ET",
+        "addressLocality": "Addis Ababa"
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Ethiopia"
+      },
+      "sameAs": [
+        "https://www.facebook.com/ethiohello",
+        "https://www.instagram.com/ethiohello",
+        "https://twitter.com/ethiohello",
+        "https://t.me/ethiohello"
+      ],
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://helloet.devvoltz.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <!-- STRUCTURED DATA for Website -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "EthioHello",
+      "url": "https://helloet.devvoltz.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://helloet.devvoltz.com/search?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    
+    <!-- ORGANIZATION STRUCTURED DATA -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "EthioHello",
+      "url": "https://helloet.devvoltz.com/",
+      "logo": "https://helloet.devvoltz.com/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer service",
+        "email": "support@ethiohello.com",
+        "availableLanguage": ["English", "Amharic"]
+      },
+      "sameAs": [
+        "https://www.facebook.com/ethiohello",
+        "https://www.instagram.com/ethiohello",
+        "https://twitter.com/ethiohello",
+        "https://t.me/ethiohello"
+      ]
+    }
+    </script>
+    
+    <!-- BREADCRUMB LIST STRUCTURED DATA -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://helloet.devvoltz.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Hotels in Ethiopia",
+          "item": "https://helloet.devvoltz.com/hotels"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Restaurants in Ethiopia",
+          "item": "https://helloet.devvoltz.com/restaurants"
+        }
+      ]
+    }
+    </script>
+    
+    <!-- FAVICONS -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    
+    <!-- FONTS (Times New Roman + Modern Sans) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'google-site-verification=UUWxeo023wkIYB10zFtJXbDn1OlSarGYwMFOWaJJkLg');
+</script>
+    <title>EthioHello | Discover The Best Places in Ethiopia</title>
   </head>
   <body>
     <div id="root"></div>
+    
+    <!-- FALLBACK CONTENT FOR SEO CRAWLERS -->
+    <noscript>
+      <div style="text-align: center; padding: 40px; font-family: 'Times New Roman', serif;">
+        <h1>EthioHello – Discover The Best Places in Ethiopia</h1>
+        <p>Find and discover the finest hotels, restaurants, coffee houses, and services across Ethiopia.</p>
+        <p>✦ 500+ Hotels ✦ 300+ Restaurants ✦ 100+ Coffee Houses ✦ 50+ Cities ✦ 10k+ Happy Customers ✦</p>
+        <p>Browse by category: Hotels | Restaurants | Coffee Houses | Cake Shops | Supermarkets | Pharmacies | Gyms | Shopping Centers | Bars | Hospitals</p>
+        <p>© 2024 EthioHello – Your trusted discovery platform</p>
+      </div>
+    </noscript>
+    
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
