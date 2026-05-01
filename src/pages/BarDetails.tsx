@@ -15,14 +15,13 @@ import {
   ArrowLeft,
   Share2,
   Heart,
-  Wine,
+  
   Music,
-  Mic,
+
   PartyPopper,
   Sun,
   Star,
-  GlassWater,
-  Beer,
+ 
   Martini,
 } from "lucide-react";
 
@@ -179,7 +178,7 @@ const BarDetails = () => {
 
             {/* Beer Selection */}
             <div className="info-card">
-              <h2><Beer size={18} /> Beer Selection</h2>
+              <h2> Beer Selection</h2>
               <div className="beers-grid">
                 {beerSelection.map((beer, idx) => (
                   <div key={idx} className="beer-card">

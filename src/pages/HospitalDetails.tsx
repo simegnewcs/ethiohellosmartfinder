@@ -10,19 +10,19 @@ import {
   X,
   Calendar,
   Users,
-  CreditCard,
+ 
   CheckCircle,
   ArrowLeft,
   Share2,
   Heart,
-  Hospital,
+
   Stethoscope,
   Ambulance,
   AlertCircle,
   Activity,
   HeartPulse,
   Microscope,
-  Syringe,
+ 
   Shield,
   Truck,
 } from "lucide-react";
@@ -129,7 +129,7 @@ const HospitalDetails = () => {
                 <MapPin size={16} /> {hospital.city}, Ethiopia
               </span>
               <span className="rating">
-                <Star size={16} fill="#b8860b" color="#b8860b" />
+               
                 {hospital.rating} / 5
                 <span className="review-count">(512 reviews)</span>
               </span>
@@ -276,11 +276,11 @@ const HospitalDetails = () => {
               <h2>Contact Information</h2>
               <div className="contact-grid">
                 <div className="contact-item">
-                  <Phone size={18} />
+                 
                   <span>{hospital.phone || "+251 900 000 000"}</span>
                 </div>
                 <div className="contact-item">
-                  <Mail size={18} />
+                
                   <span>info@{hospital.name.toLowerCase().replace(/\s/g, '')}.com</span>
                 </div>
               </div>

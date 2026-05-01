@@ -4,18 +4,18 @@ import { Link } from "react-router-dom";
 import {
   Search,
   MapPin,
-  Tag,
+
   DollarSign,
   Coffee,
   Wifi,
   Car,
-  Clock,
+
   SlidersHorizontal,
   Grid,
   List,
   Star,
   Sun,
-  Wind,
+
 } from "lucide-react";
 
 const CoffeeHouses = () => {

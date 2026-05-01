@@ -8,7 +8,7 @@ import {
   Clock,
   Phone,
   Mail,
-  Globe,
+
   Star,
   MapPin,
   X,
@@ -20,9 +20,9 @@ import {
   Share2,
   Heart,
   Sun,
-  Wind,
+
   Award,
-  ThumbsUp,
+
 } from "lucide-react";
 
 const CoffeeHouseDetails = () => {

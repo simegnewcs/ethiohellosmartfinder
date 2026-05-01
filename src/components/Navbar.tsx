@@ -4,8 +4,8 @@ import {
   Search,
   User,
   ChevronDown,
-  Phone,
-  Mail,
+  // Phone,
+  // Mail,
   Moon,
   Sun,
   Bell,
@@ -13,7 +13,7 @@ import {
   ChevronRight,
   LayoutGrid,
   Building2,
-  Menu,
+  // Menu,
   X,
 } from "lucide-react";
 

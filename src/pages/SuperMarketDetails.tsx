@@ -12,7 +12,7 @@ import {
   Globe,
   X,
   ShoppingCart,
-  CreditCard,
+ 
   CheckCircle,
   ArrowLeft,
   Heart,

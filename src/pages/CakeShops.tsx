@@ -4,19 +4,17 @@ import { Link } from "react-router-dom";
 import {
   Search,
   MapPin,
-  Tag,
+ 
   DollarSign,
   Cake,
-  Gift,
-  ShoppingBag,
-  Clock,
+
   SlidersHorizontal,
   Grid,
   List,
   Star,
   Truck,
   Sparkles,
-  Heart,
+ 
 } from "lucide-react";
 
 const CakeShops = () => {

@@ -12,8 +12,7 @@ import {
   Mail,
   Globe,
   X,
-  Calendar,
-  Users,
+ 
   CreditCard,
   CheckCircle,
   ArrowLeft,

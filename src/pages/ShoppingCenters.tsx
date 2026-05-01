@@ -4,21 +4,20 @@ import { Link } from "react-router-dom";
 import {
   Search,
   MapPin,
-  Tag,
-  DollarSign,
+
   ShoppingBag,
   Store,
   Film,
-  Coffee,
+  
   Car,
-  Clock,
+ 
   SlidersHorizontal,
   Grid,
   List,
   Star,
-  ShoppingCart,
+ 
   UtensilsCrossed,
-  Wifi,
+
 } from "lucide-react";
 
 const ShoppingCenters = () => {

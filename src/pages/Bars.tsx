@@ -4,20 +4,14 @@ import { Link } from "react-router-dom";
 import {
   Search,
   MapPin,
-  Tag,
   DollarSign,
   Wine,
   Music,
-  Coffee,
   Car,
-  Clock,
   SlidersHorizontal,
   Grid,
   List,
   Star,
-  Mic,
-  GlassWater,
-  PartyPopper,
   Sun,
 } from "lucide-react";
 

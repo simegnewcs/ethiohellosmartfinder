@@ -4,21 +4,21 @@ import { Link } from "react-router-dom";
 import {
   Search,
   MapPin,
-  Tag,
+
   DollarSign,
   Dumbbell,
   Clock,
-  Car,
+ 
   Waves,
   Flame,
-  Heart,
+
   SlidersHorizontal,
   Grid,
   List,
   Star,
-  Bike,
+ 
   Users,
-  Sparkles,
+ 
 } from "lucide-react";
 
 const Gyms = () => {

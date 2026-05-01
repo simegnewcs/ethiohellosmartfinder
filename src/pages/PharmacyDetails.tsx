@@ -2,27 +2,25 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { pharmacies } from "../data/pharmacies";
 import {
-  Wifi,
+
   Car,
   Clock,
   Phone,
   MapPin,
   X,
   Calendar,
-  Users,
-  CreditCard,
+
   CheckCircle,
   ArrowLeft,
   Share2,
   Heart,
   Pill,
-  Syringe,
+ 
   Stethoscope,
   Ambulance,
   AlertCircle,
   ShoppingBag,
-  Thermometer,
-  Activity,
+ 
   Shield,
   Truck,
 } from "lucide-react";
@@ -129,7 +127,7 @@ const PharmacyDetails = () => {
                 <MapPin size={16} /> {pharmacy.city}, Ethiopia
               </span>
               <span className="rating">
-                <Star size={16} fill="#b8860b" color="#b8860b" />
+           
                 {pharmacy.rating} / 5
                 <span className="review-count">(78 reviews)</span>
               </span>
@@ -264,11 +262,11 @@ const PharmacyDetails = () => {
               <h2>Contact Information</h2>
               <div className="contact-grid">
                 <div className="contact-item">
-                  <Phone size={18} />
+                 
                   <span>{pharmacy.phone || "+251 900 000 000"}</span>
                 </div>
                 <div className="contact-item">
-                  <Mail size={18} />
+                 
                   <span>info@{pharmacy.name.toLowerCase().replace(/\s/g, '')}.com</span>
                 </div>
               </div>

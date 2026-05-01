@@ -2,16 +2,14 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { cakeShops } from "../data/cakeShops";
 import {
-  Wifi,
-  Car,
+
   Clock,
   Phone,
   Mail,
   MapPin,
   X,
   Calendar,
-  Users,
-  CreditCard,
+ 
   CheckCircle,
   ArrowLeft,
   Share2,

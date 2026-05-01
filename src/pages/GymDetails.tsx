@@ -2,13 +2,12 @@ import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { gyms } from "../data/gyms";
 import {
-  Wifi,
-  Car,
+ 
   Clock,
   Phone,
   MapPin,
   X,
-  Calendar,
+  
   Users,
   CreditCard,
   CheckCircle,
@@ -255,11 +254,11 @@ const GymDetails = () => {
               <h2>Contact Information</h2>
               <div className="contact-grid">
                 <div className="contact-item">
-                  <Phone size={18} />
+                 
                   <span>{gym.phone || "+251 900 000 000"}</span>
                 </div>
                 <div className="contact-item">
-                  <Mail size={18} />
+                
                   <span>info@{gym.name.toLowerCase().replace(/\s/g, '')}.com</span>
                 </div>
               </div>
@@ -386,7 +385,7 @@ const GymDetails = () => {
                   </div>
                   <div className="summary-row total">
                     <span>Total Today</span>
-                    <span>${(membershipPlans.find(p => p.name === membershipType)?.price || 0) + 10}</span>
+                    <span>${(Number(membershipPlans.find(p => p.name === membershipType)?.price || 0)) + 10}</span>
                   </div>
                 </div>
 

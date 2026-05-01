@@ -3,8 +3,7 @@ import { useParams } from "react-router-dom";
 import { shoppingCenters } from "../data/shoppingCenters";
 import {
   Wifi,
-  Car,
-  Coffee,
+ 
   Clock,
   Phone,
   Mail,
@@ -12,9 +11,7 @@ import {
   Star,
   MapPin,
   X,
-  Calendar,
-  Users,
-  CreditCard,
+ 
   CheckCircle,
   ArrowLeft,
   Share2,

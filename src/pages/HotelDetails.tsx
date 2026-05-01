@@ -16,9 +16,8 @@ import {
   Users,
   CreditCard,
   CheckCircle,
-  Clock,
-  ChevronDown,
-  ChevronUp,
+ 
+
   ArrowLeft,
   Share2,
   Heart

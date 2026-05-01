@@ -4,22 +4,19 @@ import { Link } from "react-router-dom";
 import {
   Search,
   MapPin,
-  Tag,
-  DollarSign,
+  
   Hospital,
   Clock,
   Car,
   Phone,
-  Stethoscope,
+ 
   Ambulance,
-  Heart,
+
   SlidersHorizontal,
   Grid,
   List,
   Star,
-  Shield,
-  AlertCircle,
-  Activity,
+
 } from "lucide-react";
 
 const Hospitals = () => {
