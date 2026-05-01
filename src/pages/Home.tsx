@@ -21,6 +21,8 @@ import {
   Wine,
   Hospital,
   ChevronRight,
+  Sparkles,
+  Heart,
 } from "lucide-react";
 
 interface HomeContext {
@@ -141,17 +143,17 @@ const Home = () => {
   ];
 
   const categories = [
-    { id: "all", name: "All Places", icon: <Building2 size={24} />, path: "/", color: "#b8860b" },
-    { id: "hotels", name: "Hotels", icon: <Hotel size={24} />, path: "/hotels", color: "#e74c3c" },
-    { id: "restaurants", name: "Restaurants", icon: <UtensilsCrossed size={24} />, path: "/restaurants", color: "#e67e22" },
-    { id: "coffee", name: "Coffee Houses", icon: <Coffee size={24} />, path: "/coffee-houses", color: "#8e44ad" },
-    { id: "cakes", name: "Cake Shops", icon: <Cake size={24} />, path: "/cake-shops", color: "#ff6b8b" },
-    { id: "supermarkets", name: "Supermarkets", icon: <ShoppingCart size={24} />, path: "/supermarkets", color: "#27ae60" },
-    { id: "pharmacies", name: "Pharmacies", icon: <Pill size={24} />, path: "/pharmacies", color: "#2e7d32" },
-    { id: "gyms", name: "Gyms", icon: <Dumbbell size={24} />, path: "/gyms", color: "#ff6d00" },
-    { id: "shopping", name: "Shopping Centers", icon: <ShoppingBag size={24} />, path: "/shopping-centers", color: "#008080" },
-    { id: "bars", name: "Bars & Nightclubs", icon: <Wine size={24} />, path: "/bars", color: "#6a1b9a" },
-    { id: "hospitals", name: "Hospitals", icon: <Hospital size={24} />, path: "/hospitals", color: "#c62828" },
+    { id: "all", name: "All Places", icon: <Building2 size={24} />, path: "/", color: "#006747" },
+    { id: "hotels", name: "Hotels", icon: <Hotel size={24} />, path: "/hotels", color: "#006747" },
+    { id: "restaurants", name: "Restaurants", icon: <UtensilsCrossed size={24} />, path: "/restaurants", color: "#006747" },
+    { id: "coffee", name: "Coffee Houses", icon: <Coffee size={24} />, path: "/coffee-houses", color: "#006747" },
+    { id: "cakes", name: "Cake Shops", icon: <Cake size={24} />, path: "/cake-shops", color: "#E27AC0" },
+    { id: "supermarkets", name: "Supermarkets", icon: <ShoppingCart size={24} />, path: "/supermarkets", color: "#006747" },
+    { id: "pharmacies", name: "Pharmacies", icon: <Pill size={24} />, path: "/pharmacies", color: "#006747" },
+    { id: "gyms", name: "Gyms", icon: <Dumbbell size={24} />, path: "/gyms", color: "#006747" },
+    { id: "shopping", name: "Shopping Centers", icon: <ShoppingBag size={24} />, path: "/shopping-centers", color: "#006747" },
+    { id: "bars", name: "Bars & Nightclubs", icon: <Wine size={24} />, path: "/bars", color: "#E27AC0" },
+    { id: "hospitals", name: "Hospitals", icon: <Hospital size={24} />, path: "/hospitals", color: "#006747" },
   ];
 
   useEffect(() => {
@@ -178,7 +180,7 @@ const Home = () => {
         <div className="hero-container">
           <div className="hero-content">
             <span className="hero-label">
-              {activeCategory !== "all" ? `Explore ${activeCategory}` : "Welcome to EthioHello"}
+              {activeCategory !== "all" ? `Explore ${activeCategory}` : "Welcome to HelloET"}
             </span>
             <h1 className="hero-title">
               Discover The Best <br />
@@ -188,7 +190,7 @@ const Home = () => {
             </h1>
             <p className="hero-description">
               Find and discover the finest hotels, restaurants, coffee houses, and services across Ethiopia.
-              <strong> EthioHello.com</strong> makes it easy to find your perfect place.
+              <strong> HelloET.com</strong> makes it easy to find your perfect place.
             </p>
             
             {/* Search Bar */}
@@ -293,7 +295,7 @@ const Home = () => {
                 <div className="card-image">
                   <img src={hotel.image} alt={hotel.name} />
                   <div className="card-rating">
-                    <Star size={14} fill="#b8860b" stroke="#b8860b" />
+                    <Star size={14} fill="#006747" stroke="#006747" />
                     <span>{hotel.rating}</span>
                   </div>
                 </div>
@@ -333,7 +335,7 @@ const Home = () => {
                 <div className="card-image">
                   <img src={restaurant.image} alt={restaurant.name} />
                   <div className="card-rating">
-                    <Star size={14} fill="#b8860b" stroke="#b8860b" />
+                    <Star size={14} fill="#006747" stroke="#006747" />
                     <span>{restaurant.rating}</span>
                   </div>
                 </div>
@@ -426,7 +428,7 @@ const Home = () => {
         <div className="container">
           <div className="cta-content">
             <h2>List Your Business With Us</h2>
-            <p>Join hundreds of businesses already growing with EthioHello.com</p>
+            <p>Join hundreds of businesses already growing with HelloET.com</p>
             <Link to="/register" className="btn btn-primary">
               Register Your Business <ArrowRight size={18} />
             </Link>
@@ -435,23 +437,34 @@ const Home = () => {
       </section>
 
       <style>{`
-        /* CSS Variables */
+        /* CSS Variables - New Brand Colors */
         .home-page {
           --font-serif: "Times New Roman", Times, Georgia, Garamond, serif;
           --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+          
+          /* NEW BRAND COLORS */
+          --color-primary: #006747;
+          --color-primary-light: #008060;
+          --color-primary-dim: #E6F4EF;
+          --color-secondary: #EEF578;
+          --color-secondary-dark: #E0E865;
+          --color-accent: #E27AC0;
+          --color-accent-light: #E895CD;
+          --color-accent-dim: #FCE9F6;
+          --color-mint: #D1EFE4;
+          --color-mint-dark: #B8E0D0;
+          
           --color-dark: #1a1a1a;
           --color-charcoal: #2c2c2c;
-          --color-accent: #b8860b;
-          --color-accent-light: #d4af37;
-          --color-accent-dim: #faf4e8;
-          --color-cream: #faf7f0;
+          --color-cream: #FAF9F5;
           --color-white: #ffffff;
           --color-gray: #6b7b7e;
           --color-gray-light: #e8e2d4;
-          --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.08);
-          --shadow-md: 0 8px 30px rgba(0, 0, 0, 0.12);
-          --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
-          --transition: all 0.3s ease;
+          
+          --shadow-sm: 0 4px 20px rgba(0, 103, 71, 0.08);
+          --shadow-md: 0 8px 30px rgba(0, 103, 71, 0.12);
+          --shadow-lg: 0 20px 40px rgba(0, 103, 71, 0.15);
+          --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         /* Container */
@@ -473,8 +486,8 @@ const Home = () => {
           font-size: 0.8rem;
           letter-spacing: 3px;
           text-transform: uppercase;
-          color: var(--color-accent);
-          background: var(--color-accent-dim);
+          color: var(--color-primary);
+          background: var(--color-primary-dim);
           padding: 0.3rem 1rem;
           border-radius: 40px;
           margin-bottom: 1rem;
@@ -501,7 +514,7 @@ const Home = () => {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: linear-gradient(135deg, #1a2a3a 0%, #0f1a24 100%);
+          background: linear-gradient(135deg, #003d2d 0%, #006747 100%);
           background-image: url('https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1600&h=900&fit=crop');
           background-size: cover;
           background-position: center 30%;
@@ -517,8 +530,8 @@ const Home = () => {
           bottom: 0;
           background: linear-gradient(
             135deg,
-            rgba(10, 20, 30, 0.85) 0%,
-            rgba(0, 0, 0, 0.7) 100%
+            rgba(0, 103, 71, 0.85) 0%,
+            rgba(0, 61, 45, 0.9) 100%
           );
         }
 
@@ -543,8 +556,8 @@ const Home = () => {
           font-size: 0.85rem;
           letter-spacing: 3px;
           text-transform: uppercase;
-          color: var(--color-accent-light);
-          background: rgba(212, 175, 55, 0.15);
+          color: var(--color-secondary);
+          background: rgba(238, 245, 120, 0.15);
           padding: 0.4rem 1rem;
           border-radius: 40px;
           margin-bottom: 1.5rem;
@@ -563,8 +576,8 @@ const Home = () => {
         }
 
         .hero-accent {
-          color: var(--color-accent-light);
-          border-bottom: 3px solid var(--color-accent-light);
+          color: var(--color-secondary);
+          border-bottom: 3px solid var(--color-secondary);
           display: inline-block;
           padding-bottom: 4px;
         }
@@ -581,7 +594,7 @@ const Home = () => {
 
         .hero-description strong {
           font-weight: 700;
-          color: var(--color-accent-light);
+          color: var(--color-secondary);
         }
 
         /* Hero Search Form */
@@ -603,7 +616,7 @@ const Home = () => {
         }
 
         .search-icon {
-          color: var(--color-accent);
+          color: var(--color-primary);
         }
 
         .hero-search-input {
@@ -625,21 +638,23 @@ const Home = () => {
           background: white;
           cursor: pointer;
           outline: none;
+          color: var(--color-dark);
         }
 
         .search-btn-hero {
           padding: 0.8rem 2rem;
-          background: var(--color-accent-light);
+          background: var(--color-secondary);
+          color: var(--color-primary);
           border: none;
           border-radius: 60px;
           font-family: var(--font-sans);
-          font-weight: 600;
+          font-weight: 700;
           cursor: pointer;
           transition: var(--transition);
         }
 
         .search-btn-hero:hover {
-          background: #c49a1c;
+          background: var(--color-secondary-dark);
           transform: translateY(-2px);
         }
 
@@ -655,7 +670,7 @@ const Home = () => {
           align-items: center;
           gap: 0.5rem;
           font-family: var(--font-sans);
-          font-weight: 500;
+          font-weight: 600;
           font-size: 1rem;
           padding: 0.85rem 2rem;
           border-radius: 48px;
@@ -666,13 +681,13 @@ const Home = () => {
         }
 
         .btn-primary {
-          background-color: var(--color-accent-light);
-          color: #1a1a1a;
+          background-color: var(--color-secondary);
+          color: var(--color-primary);
           box-shadow: var(--shadow-sm);
         }
 
         .btn-primary:hover {
-          background-color: #c49a1c;
+          background-color: var(--color-secondary-dark);
           transform: translateY(-2px);
           box-shadow: var(--shadow-md);
         }
@@ -685,8 +700,8 @@ const Home = () => {
         }
 
         .btn-secondary:hover {
-          border-color: var(--color-accent-light);
-          background-color: rgba(212, 175, 55, 0.1);
+          border-color: var(--color-secondary);
+          background-color: rgba(238, 245, 120, 0.1);
           transform: translateY(-2px);
         }
 
@@ -708,7 +723,7 @@ const Home = () => {
           font-family: var(--font-serif);
           font-size: 2rem;
           font-weight: 700;
-          color: var(--color-accent-light);
+          color: var(--color-secondary);
         }
 
         .stat-label {
@@ -716,7 +731,7 @@ const Home = () => {
           font-size: 0.85rem;
           text-transform: uppercase;
           letter-spacing: 1.5px;
-          opacity: 0.7;
+          opacity: 0.8;
         }
 
         /* Categories Section */
@@ -748,12 +763,12 @@ const Home = () => {
         .category-card:hover {
           transform: translateY(-5px);
           box-shadow: var(--shadow-md);
-          border-color: var(--color-accent);
+          border-color: var(--color-primary);
         }
 
         .category-card.active {
-          border-color: var(--color-accent);
-          background: var(--color-accent-dim);
+          border-color: var(--color-primary);
+          background: var(--color-primary-dim);
         }
 
         .category-icon {
@@ -774,7 +789,7 @@ const Home = () => {
         .category-arrow {
           opacity: 0;
           transition: var(--transition);
-          color: var(--color-accent);
+          color: var(--color-primary);
         }
 
         .category-card:hover .category-arrow {
@@ -786,7 +801,7 @@ const Home = () => {
         .featured-section,
         .restaurants-section {
           padding: 4rem 0;
-          background: var(--color-cream);
+          background: var(--color-mint);
         }
 
         .restaurants-section {
@@ -834,7 +849,7 @@ const Home = () => {
           position: absolute;
           top: 1rem;
           right: 1rem;
-          background: rgba(0, 0, 0, 0.75);
+          background: var(--color-primary);
           padding: 0.3rem 0.6rem;
           border-radius: 20px;
           display: flex;
@@ -874,7 +889,7 @@ const Home = () => {
           font-family: var(--font-serif);
           font-size: 1.3rem;
           font-weight: 700;
-          color: var(--color-accent);
+          color: var(--color-primary);
         }
 
         .per-night {
@@ -886,8 +901,8 @@ const Home = () => {
         .card-cuisine span {
           font-family: var(--font-sans);
           font-size: 0.8rem;
-          color: var(--color-accent);
-          background: var(--color-accent-dim);
+          color: var(--color-primary);
+          background: var(--color-primary-dim);
           padding: 0.2rem 0.6rem;
           border-radius: 20px;
         }
@@ -903,20 +918,21 @@ const Home = () => {
           gap: 0.5rem;
           font-family: var(--font-sans);
           font-size: 1rem;
-          color: var(--color-accent);
+          color: var(--color-primary);
           text-decoration: none;
-          font-weight: 500;
+          font-weight: 600;
           transition: var(--transition);
         }
 
         .view-all-link:hover {
           gap: 0.8rem;
+          color: var(--color-primary-light);
         }
 
         /* Why Choose Us */
         .why-choose-section {
           padding: 5rem 0;
-          background: linear-gradient(135deg, #fefcf8 0%, #f8f6f0 100%);
+          background: linear-gradient(135deg, #FAF9F5 0%, #F5F4EF 100%);
         }
 
         .why-choose-grid {
@@ -942,12 +958,12 @@ const Home = () => {
         .feature-icon {
           width: 50px;
           height: 50px;
-          background: var(--color-accent-dim);
+          background: var(--color-mint);
           border-radius: 15px;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: var(--color-accent);
+          color: var(--color-primary);
         }
 
         .feature-text h4 {
@@ -972,7 +988,7 @@ const Home = () => {
         /* CTA Section */
         .cta-section {
           padding: 5rem 0;
-          background: linear-gradient(135deg, var(--color-accent) 0%, #9a7209 100%);
+          background: linear-gradient(135deg, var(--color-primary) 0%, #004d33 100%);
           text-align: center;
         }
 
@@ -991,12 +1007,12 @@ const Home = () => {
         }
 
         .cta-content .btn-primary {
-          background: white;
-          color: var(--color-accent);
+          background: var(--color-secondary);
+          color: var(--color-primary);
         }
 
         .cta-content .btn-primary:hover {
-          background: var(--color-accent-dim);
+          background: var(--color-secondary-dark);
           transform: translateY(-2px);
         }
 

@@ -4,8 +4,6 @@ import {
   Search,
   User,
   ChevronDown,
-  // Phone,
-  // Mail,
   Moon,
   Sun,
   Bell,
@@ -13,7 +11,6 @@ import {
   ChevronRight,
   LayoutGrid,
   Building2,
-  // Menu,
   X,
 } from "lucide-react";
 
@@ -80,15 +77,15 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           <Link to="/" className="logo-wrapper">
             <div className="logo-icon">✦</div>
             <div className="logo-text">
-              <span className="logo-main">EthioHello.com</span>
+              <span className="logo-main">HelloET.com</span>
               <span className="logo-sub">Finder</span>
             </div>
           </Link>
 
-          {/* Mobile: Single button to open sidebar */}
-          <button className="mobile-sidebar-trigger mobile-only" onClick={onMenuClick}>
+          {/* Desktop Categories Button - ONLY visible on desktop */}
+          <button className="nav-categories-btn" onClick={onMenuClick}>
             <LayoutGrid size={20} />
-            <span>Categories</span>
+            <span>Browse Categories</span>
           </button>
 
           {/* Location Selector */}
@@ -98,7 +95,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
               onClick={() => setIsLocationOpen(!isLocationOpen)}
             >
               <MapPin size={16} />
-              <span>{selectedLocation}</span>
+              <span className="location-text">{selectedLocation}</span>
               <ChevronDown size={14} className={`location-chevron ${isLocationOpen ? "rotated" : ""}`} />
             </button>
 
@@ -162,7 +159,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
               <span className="notification-badge">3</span>
             </button>
 
-            {/* User Menu */}
+            {/* User Menu - Desktop */}
             <div className="user-menu-wrapper">
               <button className="user-menu-btn" onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}>
                 <div className="user-avatar">
@@ -196,7 +193,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
               )}
             </div>
 
-            {/* Mobile user menu trigger */}
+            {/* Mobile user menu trigger - ONLY visible on mobile/tablet */}
             <button className="action-btn mobile-user-menu-btn" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
               <User size={20} />
             </button>
@@ -222,7 +219,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         </div>
       </nav>
 
-      {/* Mobile User Menu (Right side drawer for user actions) */}
+      {/* Mobile User Menu (Right side drawer for user actions) - ONLY on mobile/tablet */}
       <div className={`mobile-user-drawer ${isMobileMenuOpen ? "open" : ""}`}>
         <div className="mobile-drawer-header">
           <div className="user-info">
@@ -274,14 +271,21 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         .navbar {
           --font-serif: "Times New Roman", Times, Georgia, "EB Garamond", serif;
           --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-          --gold: #b8860b;
-          --gold-light: #d4af37;
-          --gold-dim: #faf4e8;
+          
+          /* BRAND COLORS */
+          --primary: #006747;
+          --primary-light: #008060;
+          --primary-dim: #E6F4EF;
+          --secondary: #EEF578;
+          --secondary-dark: #E0E865;
+          --accent: #E27AC0;
+          --mint: #D1EFE4;
+          
           --dark: #1e2a2e;
           --gray: #5a6b6f;
           --gray-light: #e2ddd0;
           --white: #ffffff;
-          --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+          --shadow: 0 4px 20px rgba(0, 103, 71, 0.08);
           --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           
           position: fixed;
@@ -313,21 +317,19 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           gap: 1rem;
         }
 
-        .mobile-only {
-          display: none;
-        }
-
+        /* Logo */
         .logo-wrapper {
           display: flex;
           align-items: center;
           gap: 0.75rem;
           text-decoration: none;
           transition: var(--transition);
+          flex-shrink: 0;
         }
 
         .logo-icon {
           font-size: 1.8rem;
-          color: var(--gold);
+          color: var(--primary);
           font-family: var(--font-serif);
           transition: transform 0.3s ease;
         }
@@ -352,31 +354,33 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         .logo-sub {
           font-family: var(--font-serif);
           font-size: 0.7rem;
-          color: var(--gold);
+          color: var(--primary);
           letter-spacing: 1px;
         }
 
-        .mobile-sidebar-trigger {
+        /* Desktop Categories Button */
+        .nav-categories-btn {
           display: flex;
           align-items: center;
           gap: 0.5rem;
           padding: 0.5rem 1rem;
-          background: var(--gold-dim);
+          background: var(--mint);
           border: 1px solid var(--gray-light);
           border-radius: 40px;
           cursor: pointer;
           font-family: var(--font-sans);
           font-size: 0.85rem;
-          color: var(--gold);
+          color: var(--primary);
           transition: var(--transition);
         }
 
-        .mobile-sidebar-trigger:hover {
-          background: var(--gold);
+        .nav-categories-btn:hover {
+          background: var(--primary);
           color: white;
-          border-color: var(--gold);
+          border-color: var(--primary);
         }
 
+        /* Location Selector */
         .location-selector-wrapper {
           position: relative;
         }
@@ -386,7 +390,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           align-items: center;
           gap: 0.5rem;
           padding: 0.5rem 1rem;
-          background: var(--gold-dim);
+          background: var(--mint);
           border: 1px solid var(--gray-light);
           border-radius: 40px;
           cursor: pointer;
@@ -394,16 +398,29 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           font-size: 0.85rem;
           color: var(--dark);
           transition: var(--transition);
+          white-space: nowrap;
         }
 
         .location-selector-btn:hover {
-          background: var(--gold-light);
-          border-color: var(--gold);
+          background: var(--primary-light);
+          border-color: var(--primary);
           color: white;
+        }
+
+        .location-selector-btn:hover svg {
+          color: white;
+        }
+
+        .location-text {
+          max-width: 120px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
         }
 
         .location-chevron {
           transition: transform 0.3s ease;
+          flex-shrink: 0;
         }
 
         .location-chevron.rotated {
@@ -418,7 +435,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           background: var(--white);
           border-radius: 16px;
           box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-          min-width: 220px;
+          min-width: 200px;
           overflow: hidden;
           z-index: 1001;
           animation: dropdownFade 0.2s ease;
@@ -426,11 +443,11 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
 
         .location-header {
           padding: 0.75rem 1rem;
-          background: var(--gold-dim);
+          background: var(--primary-dim);
           font-family: var(--font-sans);
           font-size: 0.8rem;
           font-weight: 500;
-          color: var(--gold);
+          color: var(--primary);
           display: flex;
           align-items: center;
           gap: 0.5rem;
@@ -459,16 +476,17 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         }
 
         .location-item:hover {
-          background: var(--gold-dim);
-          color: var(--gold);
+          background: var(--primary-dim);
+          color: var(--primary);
         }
 
         .location-item.active {
-          background: var(--gold-dim);
-          color: var(--gold);
+          background: var(--primary-dim);
+          color: var(--primary);
           font-weight: 500;
         }
 
+        /* Desktop Search */
         .search-wrapper-desktop {
           flex: 1;
           max-width: 400px;
@@ -477,7 +495,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         .desktop-search-form {
           display: flex;
           align-items: center;
-          background: var(--gold-dim);
+          background: var(--mint);
           border-radius: 40px;
           padding: 0.2rem 0.2rem 0.2rem 1rem;
           border: 1px solid var(--gray-light);
@@ -485,8 +503,8 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         }
 
         .desktop-search-form:focus-within {
-          border-color: var(--gold);
-          box-shadow: 0 0 0 2px rgba(184, 134, 11, 0.1);
+          border-color: var(--primary);
+          box-shadow: 0 0 0 2px rgba(0, 103, 71, 0.1);
         }
 
         .desktop-search-input {
@@ -497,11 +515,12 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           font-family: var(--font-sans);
           font-size: 0.85rem;
           outline: none;
+          min-width: 100px;
         }
 
         .desktop-search-btn {
           padding: 0.4rem 1rem;
-          background: var(--gold);
+          background: var(--primary);
           color: white;
           border: none;
           border-radius: 40px;
@@ -509,16 +528,19 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           font-family: var(--font-sans);
           font-size: 0.8rem;
           transition: var(--transition);
+          white-space: nowrap;
         }
 
         .desktop-search-btn:hover {
-          background: #9a7209;
+          background: var(--primary-light);
         }
 
+        /* Actions */
         .nav-actions {
           display: flex;
           align-items: center;
           gap: 0.5rem;
+          flex-shrink: 0;
         }
 
         .action-btn {
@@ -536,8 +558,8 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         }
 
         .action-btn:hover {
-          background: var(--gold-dim);
-          color: var(--gold);
+          background: var(--primary-dim);
+          color: var(--primary);
           transform: translateY(-2px);
         }
 
@@ -545,7 +567,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           position: absolute;
           top: 2px;
           right: 2px;
-          background: var(--gold);
+          background: var(--primary);
           color: white;
           font-size: 0.6rem;
           font-family: var(--font-sans);
@@ -554,6 +576,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           min-width: 16px;
         }
 
+        /* Mobile specific elements - hidden by default */
         .search-mobile-btn {
           display: none;
         }
@@ -562,6 +585,11 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           display: none;
         }
 
+        .mobile-search-expandable {
+          display: none;
+        }
+
+        /* User Menu */
         .user-menu-wrapper {
           position: relative;
         }
@@ -579,18 +607,18 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         }
 
         .user-menu-btn:hover {
-          background: var(--gold-dim);
+          background: var(--primary-dim);
         }
 
         .user-avatar {
           width: 32px;
           height: 32px;
-          background: var(--gold-dim);
+          background: var(--primary-dim);
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: var(--gold);
+          color: var(--primary);
         }
 
         .chevron {
@@ -631,12 +659,12 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         .user-avatar-large {
           width: 48px;
           height: 48px;
-          background: var(--gold-dim);
+          background: var(--primary-dim);
           border-radius: 50%;
           display: flex;
           align-items: center;
           justify-content: center;
-          color: var(--gold);
+          color: var(--primary);
         }
 
         .dropdown-header h4 {
@@ -670,17 +698,17 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         }
 
         .dropdown-item:hover {
-          background: var(--gold-dim);
-          color: var(--gold);
+          background: var(--primary-dim);
+          color: var(--primary);
         }
 
         .register-item {
-          color: var(--gold);
+          color: var(--primary);
           font-weight: 500;
         }
 
         .login-item {
-          background: var(--gold);
+          background: var(--primary);
           color: white;
           text-align: center;
           justify-content: center;
@@ -689,51 +717,11 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         }
 
         .login-item:hover {
-          background: #9a7209;
+          background: var(--primary-light);
           color: white;
         }
 
-        .mobile-search-expandable {
-          max-height: 0;
-          overflow: hidden;
-          transition: max-height 0.4s ease, padding 0.3s ease;
-          background: var(--white);
-          border-top: 1px solid var(--gray-light);
-        }
-
-        .mobile-search-expandable.open {
-          max-height: 80px;
-          padding: 0.8rem 1rem;
-        }
-
-        .mobile-search-form {
-          display: flex;
-          align-items: center;
-          gap: 0.5rem;
-          background: var(--gold-dim);
-          border-radius: 40px;
-          padding: 0.2rem 0.2rem 0.2rem 1rem;
-        }
-
-        .mobile-search-input {
-          flex: 1;
-          background: none;
-          border: none;
-          padding: 0.6rem 0;
-          font-family: var(--font-sans);
-          font-size: 0.9rem;
-          outline: none;
-        }
-
-        .mobile-search-submit {
-          padding: 0.4rem 1rem;
-          background: var(--gold);
-          color: white;
-          border: none;
-          border-radius: 40px;
-          cursor: pointer;
-        }
-
+        /* Mobile User Drawer */
         .mobile-user-drawer {
           position: fixed;
           top: 0;
@@ -796,8 +784,8 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         }
 
         .mobile-drawer-item:hover {
-          background: var(--gold-dim);
-          color: var(--gold);
+          background: var(--primary-dim);
+          color: var(--primary);
         }
 
         .mobile-divider {
@@ -821,12 +809,12 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         }
 
         .mobile-register-btn {
-          background: var(--gold-dim);
-          color: var(--gold);
+          background: var(--primary-dim);
+          color: var(--primary);
         }
 
         .mobile-login-btn {
-          background: var(--gold);
+          background: var(--primary);
           color: white;
         }
 
@@ -841,42 +829,206 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           animation: fadeIn 0.3s ease;
         }
 
+        /* Mobile Search Expandable */
+        .mobile-search-expandable {
+          max-height: 0;
+          overflow: hidden;
+          transition: max-height 0.4s ease, padding 0.3s ease;
+          background: var(--white);
+          border-top: 1px solid var(--gray-light);
+        }
+
+        .mobile-search-expandable.open {
+          max-height: 80px;
+          padding: 0.8rem 1rem;
+          display: block;
+        }
+
+        .mobile-search-form {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          background: var(--mint);
+          border-radius: 40px;
+          padding: 0.2rem 0.2rem 0.2rem 1rem;
+        }
+
+        .mobile-search-input {
+          flex: 1;
+          background: none;
+          border: none;
+          padding: 0.6rem 0;
+          font-family: var(--font-sans);
+          font-size: 0.9rem;
+          outline: none;
+        }
+
+        .mobile-search-submit {
+          padding: 0.4rem 1rem;
+          background: var(--primary);
+          color: white;
+          border: none;
+          border-radius: 40px;
+          cursor: pointer;
+        }
+
         @keyframes fadeIn {
           from { opacity: 0; }
           to { opacity: 1; }
         }
 
-        @media (max-width: 1024px) {
-          .search-wrapper-desktop {
-            display: none;
-          }
+        /* ============================================ */
+        /* RESPONSIVE BREAKPOINTS */
+        /* ============================================ */
 
+        /* Tablet and Mobile (below 1024px) */
+        @media (max-width: 1024px) {
+          /* Show mobile elements */
           .search-mobile-btn {
             display: flex;
           }
           
-          .mobile-only {
+          .mobile-user-menu-btn {
             display: flex;
           }
-
+          
+          .mobile-search-expandable {
+            display: block;
+          }
+          
+          /* Hide desktop elements */
+          .nav-categories-btn {
+            display: none !important;
+          }
+          
+          .search-wrapper-desktop {
+            display: none !important;
+          }
+          
+          .user-menu-wrapper {
+            display: none !important;
+          }
+          
           .navbar-container {
             padding: 0.8rem 1rem;
-          }
-
-          .location-selector-btn span {
-            display: none;
+            gap: 0.5rem;
           }
           
           .location-selector-btn {
-            padding: 0.5rem;
+            padding: 0.5rem 0.8rem;
           }
-
-          .user-menu-wrapper {
+          
+          .location-selector-btn .location-text {
             display: none;
           }
+          
+          .logo-main {
+            font-size: 0.9rem;
+          }
+          
+          .logo-sub {
+            font-size: 0.6rem;
+          }
+          
+          .logo-icon {
+            font-size: 1.5rem;
+          }
+        }
 
-          .mobile-user-menu-btn {
-            display: flex;
+        /* Mobile (below 768px) */
+        @media (max-width: 768px) {
+          body {
+            padding-top: 60px;
+          }
+          
+          .navbar-container {
+            padding: 0.6rem 0.8rem;
+          }
+          
+          .logo-text {
+            display: none;
+          }
+          
+          .logo-icon {
+            font-size: 1.5rem;
+          }
+          
+          .location-selector-btn {
+            padding: 0.4rem 0.6rem;
+          }
+          
+          .action-btn {
+            padding: 0.4rem;
+          }
+          
+          .nav-actions {
+            gap: 0.3rem;
+          }
+          
+          .notification-badge {
+            font-size: 0.5rem;
+            min-width: 14px;
+            top: 1px;
+            right: 1px;
+          }
+          
+          .mobile-search-expandable.open {
+            max-height: 70px;
+            padding: 0.6rem 0.8rem;
+          }
+        }
+
+        /* Small Mobile (below 480px) */
+        @media (max-width: 480px) {
+          .navbar-container {
+            padding: 0.5rem 0.6rem;
+          }
+          
+          .logo-icon {
+            font-size: 1.3rem;
+          }
+          
+          .location-selector-btn {
+            padding: 0.3rem 0.5rem;
+          }
+          
+          .location-selector-btn svg {
+            width: 14px;
+            height: 14px;
+          }
+          
+          .action-btn {
+            padding: 0.3rem;
+          }
+          
+          .action-btn svg {
+            width: 18px;
+            height: 18px;
+          }
+          
+          .nav-actions {
+            gap: 0.2rem;
+          }
+          
+          .mobile-search-input {
+            font-size: 0.8rem;
+          }
+          
+          .mobile-search-submit {
+            padding: 0.3rem 0.8rem;
+            font-size: 0.8rem;
+          }
+          
+          .mobile-user-drawer {
+            width: 100%;
+            max-width: none;
+          }
+        }
+
+        /* Extra Small (below 360px) */
+        @media (max-width: 360px) {
+          .location-selector-btn {
+            display: none;
           }
         }
       `}</style>
