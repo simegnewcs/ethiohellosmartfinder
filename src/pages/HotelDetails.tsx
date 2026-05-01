@@ -19,8 +19,7 @@ import {
   ArrowLeft,
   Share2,
   Heart,
-  Clock,
-  Award,
+  
 } from "lucide-react";
 
 const HotelDetails = () => {

@@ -20,7 +20,6 @@ import {
   Clock,
   Calendar,
   Users,
-  Award,
 } from "lucide-react";
 
 const RestaurantDetails = () => {
