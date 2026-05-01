@@ -202,12 +202,7 @@ const ShoppingCenterDetails = () => {
                       <p>{event.discount}</p>
                       <span className="event-dates">{event.dates}</span>
                     </div>
-                    <button 
-                      className="event-btn"
-                      onClick={() => setSelectedEvent(event.name)}
-                    >
-                      Learn More →
-                    </button>
+                  
                   </div>
                 ))}
               </div>
