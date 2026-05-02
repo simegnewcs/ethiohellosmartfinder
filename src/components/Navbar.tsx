@@ -72,26 +72,17 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
     }
   };
 
-  // Helper function to apply location filter from mobile drawer
-  const applyLocationFilter = (city: string) => {
-    setIsHamburgerOpen(false);
-    if (city === "All Places") {
-      window.location.href = "/search";
-    } else {
-      window.location.href = `/search?city=${encodeURIComponent(city)}`;
-    }
-  };
-
   return (
     <>
       <nav className={`navbar ${isScrolled ? "scrolled" : ""}`}>
         <div className="navbar-container">
           {/* Logo Section */}
           <Link to="/" className="logo-wrapper">
-            <div className="logo-icon">
-              <img src="/logo.jpg" alt="HelloET Logo" className="logo-img" />
+            <div className="logo-icon">✦</div>
+            <div className="logo-text">
+              <span className="logo-main">HelloET.com</span>
+              <span className="logo-sub">Finder</span>
             </div>
-            
           </Link>
 
           {/* Desktop Categories Button - visible on desktop only */}
@@ -230,7 +221,10 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
                 <button
                   key={city}
                   className={`mobile-location-item ${selectedLocation === city ? "active" : ""}`}
-                  onClick={() => applyLocationFilter(city)}
+                  onClick={() => {
+                    setSelectedLocation(city);
+                    setIsHamburgerOpen(false);
+                  }}
                 >
                   {city}
                 </button>
@@ -305,7 +299,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
 
       {/* Overlay for hamburger drawer */}
       {isHamburgerOpen && <div className="mobile-overlay" onClick={() => setIsHamburgerOpen(false)}></div>}
-      <style>{`
+       <style>{`
         * {
           margin: 0;
           padding: 0;
@@ -372,90 +366,14 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
         }
 
         .logo-icon {
-          width: 20%;
-          height: 20%;
-          display: flex;
-          align-items: center;
-          justify-content: center;
+          font-size: 1.8rem;
+          color: var(--primary);
+          font-family: var(--font-serif);
           transition: transform 0.3s ease;
-        }
-         /* Logo - Premium Visibility Upgrade */
-.logo-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 1rem;               /* Slightly more breathing room */
-  text-decoration: none;
-  transition: var(--transition);
-  flex-shrink: 0;
-}
-
-.logo-icon {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(145deg, #ffffff, #f5f5f0);  /* soft background */
-  border-radius: 20px;      /* more modern */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(0, 103, 71, 0.15);  /* brand colored shadow */
-  border: 1px solid rgba(0, 103, 71, 0.1);
-}
-
-.logo-img {
-  width: 85%;               /* slightly smaller inside the badge */
-  height: 85%;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.05));
-  transition: transform 0.3s ease;
-}
-
-.logo-wrapper:hover .logo-icon {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 20px rgba(0, 103, 71, 0.2);
-  border-color: var(--primary);
-}
-
-.logo-wrapper:hover .logo-img {
-  transform: scale(1.02);
-}
-
-/* Responsive - remains highly visible */
-@media (max-width: 1024px) {
-  .logo-icon {
-    width: 70px;
-    height: 70px;
-  }
-  .logo-wrapper {
-    gap: 0.75rem;
-  }
-}
-
-@media (max-width: 768px) {
-  .logo-icon {
-    width: 60px;
-    height: 60px;
-  }
-}
-
-@media (max-width: 480px) {
-  .logo-icon {
-    width: 52px;
-    height: 52px;
-  }
-  .logo-wrapper {
-    gap: 0.5rem;
-  }
-}
-        .logo-img {
-          width: 80px;
-          height: 100;
-          object-fit: contain;
-          border-radius: 8px;
         }
 
         .logo-wrapper:hover .logo-icon {
-          transform: rotate(5deg) scale(1.05);
+          transform: rotate(15deg);
         }
 
         .logo-text {
@@ -1051,8 +969,7 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           }
           
           .logo-icon {
-            width: 28px;
-            height: 28px;
+            font-size: 1.5rem;
           }
           
           .nav-categories-btn {
@@ -1094,81 +1011,80 @@ const Navbar = ({ onMenuClick }: NavbarProps) => {
           }
           
           .logo-icon {
-            width: 24px;
-            height: 24px;
+            font-size: 1.3rem;
           }
           
           .nav-categories-btn span {
             display: none;
           }
           /* Fix mobile drawer text visibility */
-          .mobile-hamburger-drawer,
-          .mobile-hamburger-drawer * {
-            color: #1e2a2e !important;
-          }
+.mobile-hamburger-drawer,
+.mobile-hamburger-drawer * {
+  color: #1e2a2e !important; /* dark text for all elements */
+}
 
-          .mobile-hamburger-drawer {
-            background: #ffffff !important;
-          }
+.mobile-hamburger-drawer {
+  background: #ffffff !important; /* white background */
+}
 
-          .drawer-title {
-            color: #006747 !important;
-          }
+.drawer-title {
+  color: #006747 !important; /* keep brand color for title */
+}
 
-          .drawer-section-title {
-            color: #1e2a2e !important;
-            font-weight: 600;
-          }
+.drawer-section-title {
+  color: #1e2a2e !important;
+  font-weight: 600;
+}
 
-          .mobile-location-item {
-            color: #5a6b6f !important;
-            background: transparent !important;
-          }
+.mobile-location-item {
+  color: #5a6b6f !important;
+  background: transparent !important;
+}
 
-          .mobile-location-item.active {
-            color: #006747 !important;
-            font-weight: 500;
-          }
+.mobile-location-item.active {
+  color: #006747 !important;
+  font-weight: 500;
+}
 
-          .mobile-search-input-drawer {
-            color: #1e2a2e !important;
-            background: transparent !important;
-          }
+.mobile-search-input-drawer {
+  color: #1e2a2e !important;
+  background: transparent !important;
+}
 
-          .mobile-search-input-drawer::placeholder {
-            color: #a0a0a0 !important;
-          }
+.mobile-search-input-drawer::placeholder {
+  color: #a0a0a0 !important;
+}
 
-          .mobile-theme-toggle {
-            color: #006747 !important;
-            background: #E6F4EF !important;
-          }
+.mobile-theme-toggle {
+  color: #006747 !important;
+  background: #E6F4EF !important;
+}
 
-          .mobile-notification-badge {
-            background: #006747 !important;
-            color: white !important;
-          }
+.mobile-notification-badge {
+  background: #006747 !important;
+  color: white !important;
+}
 
-          .mobile-drawer-link {
-            color: #006747 !important;
-          }
+.mobile-drawer-link {
+  color: #006747 !important;
+}
 
-          .mobile-profile-links a {
-            color: #5a6b6f !important;
-          }
+.mobile-profile-links a {
+  color: #5a6b6f !important;
+}
 
-          .mobile-profile-links a:hover {
-            color: #006747 !important;
-          }
+.mobile-profile-links a:hover {
+  color: #006747 !important;
+}
 
-          .close-drawer svg {
-            color: #5a6b6f !important;
-          }
+.close-drawer svg {
+  color: #5a6b6f !important;
+}
 
-          /* Ensure input text is dark */
-          .mobile-search-input-drawer {
-            color: #1e2a2e !important;
-          }
+/* Ensure input text is dark */
+.mobile-search-input-drawer {
+  color: #1e2a2e !important;
+}
           .nav-categories-btn {
             padding: 0.4rem;
           }
